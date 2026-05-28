@@ -2,14 +2,14 @@ import { ArrowUpRight, CirclePlay } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Group } from "three";
-import { Suspense, useRef } from "react";
-
 import {
   OrbitControls,
   Environment,
   useGLTF,
 } from "@react-three/drei";
+
+import { Suspense, useRef } from "react";
+import { Group } from "three";
 
 function AloeModel() {
   const { scene } = useGLTF("/aloe1.glb");
@@ -23,285 +23,275 @@ function AloeModel() {
   });
 
   return (
-    <group ref={ref} position={[0, -1.1, 0]}>
-      <primitive object={scene} scale={0.042} />
+    <group
+      ref={ref}
+      position={[0, -1.15, 0]}
+    >
+      <primitive
+        object={scene}
+        scale={0.045}
+      />
     </group>
   );
 }
 
-export default function HeroSection() {
+export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#04140b]">
-      
-      {/* BACKGROUND */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[url('/MobileView.png')] bg-cover bg-center md:bg-[url('/TabView.png')] lg:bg-[url('/DesktopView.png')]" />
+    <section className="relative overflow-hidden bg-[#04140b]">
 
-        {/* Cinematic overlay */}
-        <div className="absolute inset-0 bg-black/35" />
-      </div>
+      {/* BACKGROUNDS */}
+      <div className="absolute inset-0">
 
-      {/* MAIN WRAPPER */}
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-2 py-4 lg:px-4">
-        
-        {/* ULTRA WIDE GLASS CONTAINER */}
+        {/* Desktop Background */}
         <div
           className="
-            relative w-full
-            max-w-[96vw]
-            2xl:max-w-[1900px]
+            absolute inset-0 hidden lg:block
+            bg-[url('/DesktopView.png')]
+            bg-cover bg-center
+            opacity-70
+          "
+        />
 
-            overflow-hidden
-            rounded-[2.8rem]
+        {/* Tablet Background */}
+        <div
+          className="
+            absolute inset-0 hidden md:block lg:hidden
+            bg-[url('/TabView.png')]
+            bg-cover bg-center
+            opacity-70
+          "
+        />
 
-            border border-white/10
+        {/* Mobile Background */}
+        <div
+          className="
+            absolute inset-0 block md:hidden
+            bg-[url('/MobileView.png')]
+            bg-cover bg-center
+            opacity-70
+          "
+        />
 
-            bg-white/[0.045]
-            backdrop-blur-sm
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 bg-black/50" />
 
-            shadow-[0_10px_80px_rgba(0,0,0,0.55)]
+        {/* GLOW */}
+        <div
+          className="
+            absolute
+            left-1/2
+            top-1/2
+            h-[700px]
+            w-[700px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-emerald-500/10
+            blur-3xl
+          "
+        />
+      </div>
 
-            lg:min-h-[92vh]
+      {/* MAIN */}
+      <div className="relative z-10 flex min-h-screen items-center justify-center overflow-hidden px-4 pt-4 lg:pt-8">
+        <div
+          className="
+            mx-auto
+            grid
+            w-full
+            max-w-7xl
+            gap-10
+            py-6
+            lg:grid-cols-2
+            lg:items-center
           "
         >
-          {/* ambient glow */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-lime-400/5" />
 
-          {/* glass shine */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
+          {/* LEFT CONTENT */}
+          <div className="my-auto mt-2 lg:-mt-6">
 
-          {/* GRID */}
-          <div
-            className="
-              relative z-10
-              grid
-              min-h-[92vh]
-              items-center
-
-              lg:grid-cols-[1.2fr_1fr]
-            "
-          >
-            {/* LEFT SIDE */}
-            <div className="flex flex-col justify-center px-6 py-14 sm:px-10 md:px-14 lg:px-16 xl:px-20">
-              
-              {/* BADGE */}
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-500/10 px-5 py-2.5 backdrop-blur-md">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_#4ade80]" />
-
-                <span className="text-sm font-medium tracking-wide text-emerald-200">
-                  100% Natural • Ayurvedic Certified
-                </span>
-              </div>
-
-              {/* HEADING */}
-              <h1
-                className="
-                  mt-8
-                  max-w-[10ch]
-
-                  text-5xl
-                  font-black
-                  leading-[0.92]
-                  tracking-[-0.07em]
-
-                  text-white
-
-                  sm:text-6xl
-                  md:text-7xl
-                  lg:text-[6rem]
-                  xl:text-[7rem]
-                "
-              >
-                Pure Herbal
-
-                <span className="mt-2 block bg-gradient-to-r from-emerald-200 via-emerald-400 to-lime-300 bg-clip-text text-transparent">
-                  Care
-                </span>
-
-                <span className="mt-2 block text-white">
-                  From
-                </span>
-
-                <span className="mt-2 block bg-gradient-to-r from-emerald-300 via-green-400 to-lime-300 bg-clip-text text-transparent">
-                  Nature’s
-                </span>
-
-                <span className="mt-2 block bg-gradient-to-r from-lime-300 via-green-500 to-emerald-400 bg-clip-text text-transparent">
-                  Heart
-                </span>
-              </h1>
-
-              {/* DESCRIPTION */}
-              <p
-                className="
-                  mt-8
-                  max-w-[650px]
-
-                  text-base
-                  leading-relaxed
-                  text-white/70
-
-                  sm:text-lg
-                  lg:text-xl
-                "
-              >
-                Experience handcrafted herbal products inspired by
-                traditional Tamil wellness. From skincare to
-                haircare, every formula is naturally made for
-                healthier living and sustainable self-care.
-              </p>
-
-              {/* BUTTONS */}
-              <div className="mt-12 flex flex-wrap items-center gap-4">
-                
-                <Button
-                  size="lg"
-                  className="
-                    group h-14 rounded-full
-
-                    bg-gradient-to-r
-                    from-emerald-400
-                    to-green-500
-
-                    px-9
-
-                    text-base
-                    font-bold
-                    text-[#032112]
-
-                    shadow-[0_10px_40px_rgba(34,197,94,0.35)]
-
-                    transition-all duration-300
-
-                    hover:scale-[1.03]
-                    hover:shadow-[0_18px_55px_rgba(34,197,94,0.5)]
-                  "
-                >
-                  Shop Now
-
-                  <ArrowUpRight
-                    className="
-                      ml-2 h-5 w-5
-                      transition-transform duration-300
-                      group-hover:translate-x-1
-                      group-hover:-translate-y-1
-                    "
-                  />
-                </Button>
-
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="
-                    h-14 rounded-full
-
-                    border-white/15
-                    bg-white/[0.04]
-
-                    px-9
-
-                    text-white
-                    backdrop-blur-md
-
-                    transition-all duration-300
-
-                    hover:border-white/30
-                    hover:bg-white/[0.08]
-                  "
-                >
-                  <CirclePlay className="mr-2 h-5 w-5" />
-                  Explore Products
-                </Button>
-              </div>
-
-              {/* BOTTOM ROW */}
-              <div className="mt-14 flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
-                
-                {/* FEATURES */}
-                <div className="flex flex-wrap gap-x-6 gap-y-4">
-                  {[
-                    "Chemical Free",
-                    "Eco Friendly",
-                    "Lab Tested",
-                    "Ayurvedic",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-2 text-sm text-white/75"
-                    >
-                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/15">
-                        <div className="h-2 w-2 rounded-full bg-emerald-400" />
-                      </div>
-
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                {/* SOCIAL LINKS */}
-                <div className="flex items-center gap-3">
-
-                  {[
-                    "Facebook",
-                    "Instagram",
-                    "YouTube",
-                    "Twitter",
-                  ].map((social) => (
-                    <a
-                      key={social}
-                      href="#"
-                      className="
-                        rounded-full
-                        border border-white/10
-
-                        bg-white/[0.04]
-
-                        px-5 py-2.5
-
-                        text-sm
-                        font-medium
-                        text-white/70
-
-                        backdrop-blur-md
-
-                        transition-all duration-300
-
-                        hover:border-emerald-400/30
-                        hover:bg-emerald-400/10
-                        hover:text-emerald-300
-                        hover:shadow-[0_0_20px_rgba(52,211,153,0.25)]
-                      "
-                    >
-                      {social}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* RIGHT SIDE */}
-            <div
+            {/* BADGE */}
+            <a
+              href="#"
               className="
-                relative flex
-                h-[420px]
-                items-center justify-center
-
-                sm:h-[500px]
-                md:h-[620px]
-
-                lg:min-h-[92vh]
+                inline-flex
+                items-center
+                rounded-full
+                border
+                border-white/10
+                bg-white/5
+                px-4
+                py-1.5
+                text-sm
+                text-white
+                backdrop-blur-md
               "
             >
-              {/* ambient glow */}
-              <div className="absolute left-1/2 top-1/2 h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400/10 blur-3xl" />
+              100% Natural • Ayurvedic Certified
 
-              {/* gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/[0.02] to-transparent" />
+              <ArrowUpRight className="ml-1 size-4" />
+            </a>
 
-              {/* blur panel */}
-              <div className="absolute inset-[8%] rounded-[2rem] border border-white/5 bg-white/[0.03] backdrop-blur-[2px]" />
+            {/* TITLE */}
+            <h1
+              className="
+                mt-6
+                max-w-[15ch]
+                font-semibold
+                leading-[1.02]
+                tracking-[-0.05em]
+                text-white
 
-              {/* CANVAS */}
+                text-4xl
+                sm:text-5xl
+                lg:text-6xl
+                xl:text-7xl
+              "
+            >
+              Pure Herbal{" "}
+
+              <span className="bg-gradient-to-r from-emerald-200 via-emerald-400 to-lime-300 bg-clip-text text-transparent">
+                Care
+              </span>{" "}
+
+              From{" "}
+
+              <span className="bg-gradient-to-r from-emerald-300 via-green-400 to-lime-300 bg-clip-text text-transparent">
+                Nature’s
+              </span>{" "}
+
+              <span className="bg-gradient-to-r from-lime-300 via-green-500 to-emerald-400 bg-clip-text text-transparent">
+                Heart
+              </span>
+            </h1>
+
+            {/* DESCRIPTION */}
+            <p
+              className="
+                mt-5
+                max-w-[60ch]
+                text-base
+                leading-relaxed
+                text-white/70
+
+                sm:text-lg
+                lg:text-xl
+              "
+            >
+              Experience handcrafted herbal products inspired by
+              traditional Tamil wellness.
+            </p>
+
+            {/* BUTTONS */}
+            <div className="mt-8 flex flex-wrap items-center gap-4 sm:mt-10">
+
+              <Button
+                className="
+                  rounded-full
+
+                  bg-gradient-to-r
+                  from-emerald-400
+                  to-green-500
+
+                  font-semibold
+                  text-[#032112]
+
+                  shadow-[0_10px_40px_rgba(34,197,94,0.35)]
+
+                  transition-all
+                  duration-300
+
+                  hover:scale-[1.03]
+                  hover:shadow-[0_18px_55px_rgba(34,197,94,0.5)]
+                "
+                size="lg"
+              >
+                Shop Now
+
+                <ArrowUpRight className="h-5! w-5!" />
+              </Button>
+
+              <Button
+                className="
+                  rounded-full
+                  border-white/15
+                  bg-white/[0.05]
+                  text-white
+                  shadow-none
+                  backdrop-blur-md
+
+                  hover:bg-white/[0.08]
+                "
+                size="lg"
+                variant="outline"
+              >
+                <CirclePlay className="h-5! w-5!" />
+
+                Explore Products
+              </Button>
+            </div>
+
+            {/* FEATURES */}
+            {/* <div className="mt-10 flex flex-wrap gap-x-6 gap-y-4">
+              {[
+                "Chemical Free",
+                "Eco Friendly",
+                "Lab Tested",
+                "Ayurvedic",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-white/75"
+                >
+                  <div
+                    className="
+                      flex
+                      h-5
+                      w-5
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-emerald-400/15
+                    "
+                  >
+                    <div className="h-2 w-2 rounded-full bg-emerald-400" />
+                  </div>
+
+                  {item}
+                </div>
+              ))}
+            </div> */}
+          </div>
+
+          {/* RIGHT SIDE */}
+          <div className="relative flex items-center justify-center mt-2 lg:-mt-4">
+            <div
+              className="
+                relative
+
+                h-[340px]
+                w-full
+
+                overflow-hidden
+                rounded-3xl
+
+                border
+                border-white/10
+
+                bg-white/[0.04]
+
+                shadow-[0_10px_80px_rgba(0,0,0,0.45)]
+
+                backdrop-blur-sm
+
+                sm:h-[450px]
+                md:h-[550px]
+                lg:h-[700px]
+                lg:max-w-[850px]
+              "
+            >
+
+              {/* 3D MODEL */}
               <Canvas
                 className="h-full w-full"
                 camera={{
@@ -312,11 +302,11 @@ export default function HeroSection() {
                   antialias: true,
                 }}
               >
-                <ambientLight intensity={0.85} />
+                <ambientLight intensity={1} />
 
                 <directionalLight
                   position={[5, 5, 5]}
-                  intensity={1.1}
+                  intensity={1.2}
                 />
 
                 <Suspense fallback={null}>
@@ -331,6 +321,30 @@ export default function HeroSection() {
 
                 <Environment preset="sunset" />
               </Canvas>
+
+              {/* FLOATING CARD */}
+              <div
+                className="
+                  absolute
+                  bottom-5
+                  left-5
+
+                  rounded-2xl
+                  border
+                  border-white/10
+
+                  bg-black/30
+
+                  px-5
+                  py-4
+
+                  backdrop-blur-md
+                "
+              >
+                <p className="text-sm text-emerald-300">
+                  Natural Aloe vera
+                </p>
+              </div>
             </div>
           </div>
         </div>

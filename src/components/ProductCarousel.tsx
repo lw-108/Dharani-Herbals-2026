@@ -8,11 +8,13 @@ export const ProductCarousel = () => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    
     if (bannerRef.current) {
       gsap.from(bannerRef.current, {
         y: -100,
         opacity: 0,
         duration: 1,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: bannerRef.current,
           start: "top 80%",
@@ -23,16 +25,28 @@ export const ProductCarousel = () => {
   }, []);
 
   return (
-    <section className="bg-[#12210f] py-12" id="products">
-      <div className="w-full">
+    <section className="relative bg-[#12210f] py-12 min-h-screen overflow-hidden" id="products">
+      {/* Background Banner - Full width, absolute positioned, behind everything */}
+      <div className="absolute inset-0 w-full h-full z-0">
         <img
           ref={bannerRef}
           src="/LeafBanner.png"
           alt="Leaf Banner"
-          className="w-full h-auto object-cover"
+          className="w-full h-full object-cover"
         />
       </div>
-      <div className="container mx-auto px-4">
+
+      {/* Optional: Arch overlay at the top */}
+      <div className="absolute top-0 left-0 w-full z-[1]">
+        <img
+          src="/LeafBanner.png"
+          alt="Leaf Banner Arch"
+          className="w-full h-auto object-contain"
+        />
+      </div>
+
+      {/* Content Container - Above banner with z-index */}
+      <div className="relative z-10 container mx-auto px-4 mt-16">
         <h2 className="text-3xl font-bold text-center text-white mb-8">
           Our Products
         </h2>
