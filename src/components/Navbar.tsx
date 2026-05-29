@@ -12,20 +12,24 @@ import {
 
 import { NavigationSheet } from "@/components/navigation-sheet";
 import { Link } from "react-router-dom";
+import { useCartWishlist } from "@/context/CartWishlistContext";
 
-const navLinks = [
-  "Home",
-  "Hair",
-  "Skin",
-  "Baby",
-  "Health & Wellness",
-  "Shop All",
-  "About Us",
-  "Contact",
+const navLinks: { label: string; path: string }[] = [
+  { label: "Home", path: "/" },
+  { label: "Hair", path: "/EveryProducts?category=HAIR" },
+  { label: "Skin", path: "/EveryProducts?category=SKIN" },
+  { label: "Baby", path: "/EveryProducts?category=BABY" },
+  { label: "Health & Wellness", path: "/EveryProducts?category=HEALTH%20%26%20WELLNESS" },
+  { label: "Shop All", path: "/EveryProducts" },
+  { label: "About Us", path: "/About" },
+  { label: "Contact", path: "/Contact" },
 ];
+
+
 
 export const Navbar = () => {
   const isLoggedIn = false;
+  const { cart, wishlist } = useCartWishlist();
 
   return (
     <header
@@ -98,58 +102,14 @@ export const Navbar = () => {
             "
           >
             {navLinks.map((link) => (
-              <li key={link}>
+              <li key={link.label}>
                 <Link
-                  to={`/${link
-                    .replace(/\s+/g, "-")
-                    .toLowerCase()}`}
-                  className="
-                    group
-                    relative
-                    flex
-                    items-center
-
-                    rounded-full
-
-                    px-4
-                    py-2
-
-                    text-[15px]
-                    font-medium
-                    tracking-[0.01em]
-
-                    text-zinc-700
-
-                    transition-all
-                    duration-300
-
-                    hover:bg-[#0d5c3f]/6
-                    hover:text-[#0d5c3f]
-                  "
+                  to={link.path}
+                  className="group relative flex items-center rounded-full px-4 py-2 text-[15px] font-medium tracking-[0.01em] text-zinc-700 transition-all duration-300 hover:bg-[#0d5c3f]/6 hover:text-[#0d5c3f]"
                 >
-                  {link}
-
+                  {link.label}
                   {/* UNDERLINE */}
-                  <span
-                    className="
-                      absolute
-                      bottom-[6px]
-                      left-1/2
-
-                      h-[2px]
-                      w-0
-
-                      -translate-x-1/2
-
-                      rounded-full
-                      bg-[#0d5c3f]
-
-                      transition-all
-                      duration-300
-
-                      group-hover:w-[55%]
-                    "
-                  />
+                  <span className="absolute bottom-[6px] left-1/2 h-[2px] w-0 -translate-x-1/2 rounded-full bg-[#0d5c3f] transition-all duration-300 group-hover:w-[55%]"></span>
                 </Link>
               </li>
             ))}
@@ -168,104 +128,92 @@ export const Navbar = () => {
           "
         >
           {/* WISHLIST */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="
-              relative
-
-              h-10
-              w-10
-
-              rounded-full
-
-              text-zinc-700
-
-              transition-all
-              duration-300
-
-              hover:scale-105
-              hover:bg-[#0d5c3f]/8
-              hover:text-[#0d5c3f]
-            "
-          >
-            <Heart className="h-[18px] w-[18px]" />
-
-            <span
+          <Link to="/wishlist" className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
               className="
-                absolute
-                -right-0.5
-                -top-0.5
-
-                flex
-                h-4
-                w-4
-                items-center
-                justify-center
-
+                relative
+                h-10
+                w-10
                 rounded-full
-                bg-[#0d5c3f]
-
-                text-[9px]
-                font-bold
-                text-white
-
-                shadow-sm
+                text-zinc-700
+                transition-all
+                duration-300
+                hover:scale-105
+                hover:bg-[#0d5c3f]/8
+                hover:text-[#0d5c3f]
               "
             >
-              2
-            </span>
-          </Button>
+              <Heart className="h-[18px] w-[18px]" />
+              {wishlist.length > 0 && (
+                <span
+                  className="
+                    absolute
+                    -right-0.5
+                    -top-0.5
+                    flex
+                    h-4
+                    w-4
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-[#0d5c3f]
+                    text-[9px]
+                    font-bold
+                    text-white
+                    shadow-sm
+                  "
+                >
+                  {wishlist.length}
+                </span>
+              )}
+            </Button>
+          </Link>
 
           {/* CART */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="
-              relative
-
-              h-10
-              w-10
-
-              rounded-full
-
-              text-zinc-700
-
-              transition-all
-              duration-300
-
-              hover:scale-105
-              hover:bg-[#0d5c3f]/8
-              hover:text-[#0d5c3f]
-            "
-          >
-            <ShoppingCart className="h-[18px] w-[18px]" />
-
-            <span
+          <Link to="/cart" className="relative">
+            <Button
+              variant="ghost"
+              size="icon"
               className="
-                absolute
-                -right-0.5
-                -top-0.5
-
-                flex
-                h-4
-                w-4
-                items-center
-                justify-center
-
+                relative
+                h-10
+                w-10
                 rounded-full
-                bg-[#0d5c3f]
-
-                text-[9px]
-                font-bold
-                text-white
-
-                shadow-sm
+                text-zinc-700
+                transition-all
+                duration-300
+                hover:scale-105
+                hover:bg-[#0d5c3f]/8
+                hover:text-[#0d5c3f]
               "
             >
-              3
-            </span>
-          </Button>
+              <ShoppingCart className="h-[18px] w-[18px]" />
+              {cart.length > 0 && (
+                <span
+                  className="
+                    absolute
+                    -right-0.5
+                    -top-0.5
+                    flex
+                    h-4
+                    w-4
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-[#0d5c3f]
+                    text-[9px]
+                    font-bold
+                    text-white
+                    shadow-sm
+                  "
+                >
+                  {cart.length}
+                </span>
+              )}
+            </Button>
+          </Link>
 
           {/* AUTH */}
           {isLoggedIn ? (
@@ -293,76 +241,63 @@ export const Navbar = () => {
                 hidden
                 items-center
                 gap-2
-
                 sm:flex
               "
             >
               {/* SIGN IN */}
-              <Button
-                variant="outline"
-                size="sm"
-                className="
-                  relative
-                  top-[-1px]
-
-                  h-9
-
-                  rounded-full
-
-                  border-zinc-200
-                  bg-white/90
-
-                  px-5
-
-                  text-sm
-                  font-semibold
-                  text-zinc-700
-
-                  shadow-sm
-                  backdrop-blur-md
-
-                  transition-all
-                  duration-300
-
-                  hover:border-[#0d5c3f]/30
-                  hover:bg-[#0d5c3f]/5
-                  hover:text-[#0d5c3f]
-                "
-              >
-                Sign In
-              </Button>
+              <Link to="/signin">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="
+                    relative
+                    top-[-1px]
+                    h-9
+                    rounded-full
+                    border-zinc-200
+                    bg-white/90
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-zinc-700
+                    shadow-sm
+                    backdrop-blur-md
+                    transition-all
+                    duration-300
+                    hover:border-[#0d5c3f]/30
+                    hover:bg-[#0d5c3f]/5
+                    hover:text-[#0d5c3f]
+                  "
+                >
+                  Sign In
+                </Button>
+              </Link>
 
               {/* SIGN UP */}
-              <Button
-                size="sm"
-                className="
-                  relative
-                  top-[-1px]
-
-                  h-9
-
-                  rounded-full
-
-                  bg-[#0d5c3f]
-
-                  px-5
-
-                  text-sm
-                  font-semibold
-                  text-white
-
-                  shadow-md
-
-                  transition-all
-                  duration-300
-
-                  hover:scale-[1.02]
-                  hover:bg-[#0b4f36]
-                  hover:shadow-lg
-                "
-              >
-                Sign Up
-              </Button>
+              <Link to="/signup">
+                <Button
+                  size="sm"
+                  className="
+                    relative
+                    top-[-1px]
+                    h-9
+                    rounded-full
+                    bg-[#0d5c3f]
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-white
+                    shadow-md
+                    transition-all
+                    duration-300
+                    hover:scale-[1.02]
+                    hover:bg-[#0b4f36]
+                    hover:shadow-lg
+                  "
+                >
+                  Sign Up
+                </Button>
+              </Link>
             </div>
           )}
 

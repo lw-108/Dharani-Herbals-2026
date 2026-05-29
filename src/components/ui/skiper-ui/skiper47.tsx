@@ -50,23 +50,17 @@ const Skiper47 = () => {
       name: "Onion Shampoo",
       description: "Growth Boosting Formula"
     },
-    { 
-      src: "/products/ricekanji.png", 
-      alt: "Rice Kanji",
-      name: "Rice Kanji",
-      description: "Protein Rich Treatment"
-    },
   ];
 
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-hidden">
+    <div className="flex h-full w-full items-center justify-center overflow-hidden py-20">
       <Carousel_001 
         className="" 
         products={products} 
         showPagination 
         loop 
         autoplay={true}
-        spaceBetween={40}
+        spaceBetween={20}
       />
     </div>
   );
@@ -81,7 +75,7 @@ const Carousel_001 = ({
   showNavigation = false,
   loop = true,
   autoplay = false,
-  spaceBetween = 40,
+  spaceBetween = 20,
 }: {
   products: { src: string; alt: string; name: string; description: string }[];
   className?: string;
@@ -93,8 +87,14 @@ const Carousel_001 = ({
 }) => {
   const css = `
   .Carousal_001 {
-    padding-bottom: 50px !important;
+    padding: 40px 0 60px !important;
+    overflow: visible !important;
   }
+  
+  .Carousal_001 .swiper-wrapper {
+    align-items: center;
+  }
+  
   .swiper-pagination-bullet {
     background: white !important;
     opacity: 0.5;
@@ -103,15 +103,60 @@ const Carousel_001 = ({
     background: white !important;
     opacity: 1;
   }
+  
   .product-card {
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2rem;
   }
+  
+  /* Center slide - larger and prominent */
   .swiper-slide-active .product-card {
-    transform: scale(1.05);
+    transform: scale(1.25);
+    z-index: 10;
+    filter: brightness(1.15) drop-shadow(0 25px 25px rgba(0, 0, 0, 0.3));
   }
+  
+  .swiper-slide-active .product-card .product-image-wrapper {
+    height: 400px !important;
+  }
+  
+  /* Side slides - smaller and slightly dimmed */
+  .swiper-slide:not(.swiper-slide-active) .product-card {
+    transform: scale(0.8);
+    filter: brightness(0.6) drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    opacity: 0.7;
+  }
+  
+  .swiper-slide:not(.swiper-slide-active) .product-card .product-image-wrapper {
+    height: 280px !important;
+  }
+  
+  /* Text visibility */
   .swiper-slide-active .product-name {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  .swiper-slide:not(.swiper-slide-active) .product-name {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+  
+  .product-name {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Image fit - show full image without cropping */
+  .product-image-wrapper img {
+    object-fit: contain !important;
+  }
+  
+  /* Hover effect for non-active slides */
+  .swiper-slide:not(.swiper-slide-active):hover .product-card {
+    filter: brightness(0.8) drop-shadow(0 15px 20px rgba(0, 0, 0, 0.25));
+    transform: scale(0.85);
+    opacity: 0.9;
   }
   `;
   
@@ -123,7 +168,7 @@ const Carousel_001 = ({
         duration: 0.3,
         delay: 0.5,
       }}
-      className={cn("w-3xl relative", className)}
+      className={cn("w-full max-w-6xl relative px-4", className)}
     >
       <style>{css}</style>
 
@@ -132,7 +177,7 @@ const Carousel_001 = ({
         autoplay={
           autoplay
             ? {
-                delay: 2500,
+                delay: 3000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }
@@ -142,14 +187,14 @@ const Carousel_001 = ({
         grabCursor={true}
         centeredSlides={true}
         loop={loop}
-        slidesPerView={2.43}
-        speed={800}
+        slidesPerView={2}
+        speed={600}
         coverflowEffect={{
           rotate: 0,
           slideShadows: false,
-          stretch: 0,
-          depth: 100,
-          modifier: 2.5,
+          stretch: -30,
+          depth: 250,
+          modifier: 1.2,
         }}
         pagination={
           showPagination
@@ -171,20 +216,20 @@ const Carousel_001 = ({
         modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
       >
         {products.map((product, index) => (
-          <SwiperSlide key={index} className="!h-auto py-4">
-            <div className="product-card flex flex-col items-center gap-3">
-              {/* Product Image */}
-              <div className="!h-[280px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+          <SwiperSlide key={index} className="!h-auto !overflow-visible">
+            <div className="product-card flex flex-col items-center gap-6">
+              {/* Product Image - no background */}
+              <div className="product-image-wrapper h-[340px] w-full rounded-[2rem] overflow-hidden transition-all duration-500">
                 <img
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                   src={product.src}
                   alt={product.alt}
                 />
               </div>
               
               {/* Product Name and Description */}
-              <div className="product-name text-center px-4 opacity-80 transform translate-y-2 transition-all duration-300">
-                <h3 className="text-lg font-semibold text-white mb-1">
+              <div className="product-name text-center px-4 transform translate-y-2 transition-all duration-500">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {product.name}
                 </h3>
                 <p className="text-sm text-green-300/80 font-medium">
@@ -196,11 +241,11 @@ const Carousel_001 = ({
         ))}
         {showNavigation && (
           <div>
-            <div className="swiper-button-next after:hidden !text-white hover:scale-110 transition-transform">
-              <ChevronRightIcon className="h-6 w-6 text-white" />
+            <div className="swiper-button-next after:hidden !text-white hover:scale-110 transition-transform !right-2">
+              <ChevronRightIcon className="h-8 w-8 text-white" />
             </div>
-            <div className="swiper-button-prev after:hidden !text-white hover:scale-110 transition-transform">
-              <ChevronLeftIcon className="h-6 w-6 text-white" />
+            <div className="swiper-button-prev after:hidden !text-white hover:scale-110 transition-transform !left-2">
+              <ChevronLeftIcon className="h-8 w-8 text-white" />
             </div>
           </div>
         )}
@@ -210,20 +255,3 @@ const Carousel_001 = ({
 };
 
 export { Carousel_001 };
-
-/**
- * Skiper 47 Carousel_001 — React + Swiper
- * Built with Swiper.js - Read docs to learn more https://swiperjs.com/
- * Illustrations by AarzooAly - https://x.com/AarzooAly
- *
- * License & Usage:
- * - Free to use and modify in both personal and commercial projects.
- * - Attribution to Skiper UI is required when using the free version.
- * - No attribution required with Skiper UI Pro.
- *
- * Feedback and contributions are welcome.
- *
- * Author: @gurvinder-singh02
- * Website: https://gxuri.in
- * Twitter: https://x.com/Gur__vi
- */
