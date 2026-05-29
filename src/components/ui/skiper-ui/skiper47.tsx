@@ -96,11 +96,11 @@ const Carousel_001 = ({
   }
   
   .swiper-pagination-bullet {
-    background: white !important;
+    background: green !important;
     opacity: 0.5;
   }
   .swiper-pagination-bullet-active {
-    background: white !important;
+    background: green !important;
     opacity: 1;
   }
   
@@ -229,10 +229,10 @@ const Carousel_001 = ({
               
               {/* Product Name and Description */}
               <div className="product-name text-center px-4 transform translate-y-2 transition-all duration-500">
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-[#00ff3b] mb-2">
                   {product.name}
                 </h3>
-                <p className="text-sm text-green-300/80 font-medium">
+                <p className="text-sm text-[#00ff3b] font-medium">
                   {product.description}
                 </p>
               </div>

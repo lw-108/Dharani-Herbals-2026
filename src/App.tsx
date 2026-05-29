@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+const AdminLoginPage = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 import Banner from "./sections/BannerSection";
 import HeroSection from "./sections/HeroSection";
 import Navbar from "@/components/Navbar";
 import ProductCarousel from "@/components/ProductCarousel";
 import MostLovedPicks from "./sections/MostLovedPicks";
-import { ShopByCategory } from "./sections/ShopByCategory";
+import ShopByCategory from "./sections/ShopByCategory";
 import { DiscoverTheDifference } from "./sections/DiscoverTheDifference";
 import { GoogleReviewsMarquee } from "./sections/GoogleReviewsMarquee";
 import { TrendingProducts } from "./sections/TrendingProducts";
@@ -21,7 +24,7 @@ import {HealthWellnessProducts} from "./pages/elementpages/HealthWellnessProduct
 import {PoojaProducts} from "./pages/elementpages/PoojaProducts";
 import { AllProductsPage }  from "./pages/elementpages/EveryProducts";
 
-import { lazy, Suspense } from "react";
+
 const CartPage = lazy(() => import("./pages/CartPage"));
 const WishlistPage = lazy(() => import("./pages/WishlistPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
@@ -68,6 +71,8 @@ export function App() {
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/admin" element={<AdminLoginPage />} />
+            <Route path="/admin/dashboard/*" element={<AdminDashboard />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

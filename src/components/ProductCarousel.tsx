@@ -25,7 +25,7 @@ export const ProductCarousel = () => {
   }, []);
 
   return (
-    <section className="relative bg-[#12210f] py-12 min-h-screen overflow-hidden" id="products">
+    <section className="relative bg-white py-12 min-h-screen overflow-hidden" id="products">
       {/* Background Banner - Full width, absolute positioned, behind everything */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img

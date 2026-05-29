@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { User, Mail, Lock, Eye, EyeOff, Sparkles, CheckCircle2, AlertCircle } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, Sparkles, CheckCircle2, AlertCircle, Phone } from 'lucide-react';
 
 export const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName || !email || !password || !confirmPassword) {
+    if (!fullName || !email || !mobileNumber || !password || !confirmPassword) {
       setStatus('error');
       setMessage('Please fill in all fields.');
       return;
@@ -39,14 +40,61 @@ export const SignUpPage: React.FC = () => {
       return;
     }
 
-    // Mock successful signup
-    setStatus('success');
-    setMessage('Account successfully created! Welcome aboard.');
-    
-    // Redirect to Shop All after 1.5 seconds
-    setTimeout(() => {
-      navigate('/EveryProducts');
-    }, 1500);
+    try {
+      const response = await fetch('/api/register/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          username: email,
+          email, 
+          mobile: mobileNumber, // Required by backend
+          password, 
+          name: fullName,       // Required by backend
+          first_name: fullName.split(' ')[0],
+          last_name: fullName.split(' ').slice(1).join(' ') || ''
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        
+        let errorMsg = 'Registration failed. Please try again.';
+        
+        if (typeof errorData === 'object' && errorData !== null) {
+          if (errorData.message) {
+            errorMsg = errorData.message;
+          } else if (errorData.detail) {
+            errorMsg = errorData.detail;
+          } else {
+            // It's likely a validation error object with fields as keys
+            const messages = Object.entries(errorData).map(([field, msgs]) => {
+              const msgString = Array.isArray(msgs) ? msgs[0] : msgs;
+              // format field name for readability (e.g. mobile_number -> Mobile Number)
+              const formattedField = field.charAt(0).toUpperCase() + field.slice(1).replace('_', ' ');
+              return `${formattedField}: ${msgString}`;
+            });
+            if (messages.length > 0) {
+              errorMsg = messages.join(' | ');
+            }
+          }
+        }
+        
+        throw new Error(errorMsg);
+      }
+
+      setStatus('success');
+      setMessage('Account successfully created! Welcome aboard.');
+      
+      // Redirect to sign in or shop after successful registration
+      setTimeout(() => {
+        navigate('/signin');
+      }, 1500);
+    } catch (err: any) {
+      setStatus('error');
+      setMessage(err.message || 'An error occurred during registration.');
+    }
   };
 
   return (
@@ -128,6 +176,24 @@ export const SignUpPage: React.FC = () => {
                       if (status === 'error') setStatus('idle');
                     }}
                     placeholder="name@example.com"
+                    className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-2xl pl-11 pr-4 py-3 text-white placeholder-gray-600 outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              {/* Mobile Number field */}
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Mobile Number</label>
+                <div className="relative">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <input
+                    type="tel"
+                    value={mobileNumber}
+                    onChange={(e) => {
+                      setMobileNumber(e.target.value);
+                      if (status === 'error') setStatus('idle');
+                    }}
+                    placeholder="+91 9876543210"
                     className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-2xl pl-11 pr-4 py-3 text-white placeholder-gray-600 outline-none transition-colors"
                   />
                 </div>

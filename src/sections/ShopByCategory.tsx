@@ -1,109 +1,107 @@
-"use client";
-
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRightIcon, SparklesIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { apiFetch } from "@/lib/api";
 
-const categories = [
-  {
-    name: "Hair",
-    description: "Natural hair care solutions for healthy, lustrous hair",
-    image: "/categories/hair.jpg",
-    productCount: "12 Products",
-    gradient: "from-amber-500/80 to-orange-600/80",
-    bgGradient: "from-amber-500/20 to-transparent",
-    tagColor: "bg-amber-500",
+// Motion variants for container and items
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08 },
   },
-  {
-    name: "Skin",
-    description: "Radiant, glowing skin with natural ingredients",
-    image: "/categories/skin.jpg",
-    productCount: "18 Products",
-    gradient: "from-rose-500/80 to-pink-600/80",
-    bgGradient: "from-rose-500/20 to-transparent",
-    tagColor: "bg-rose-500",
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
   },
-  {
-    name: "Baby",
-    description: "Gentle, safe care for your little ones",
-    image: "/categories/baby.jpg",
-    productCount: "8 Products",
-    gradient: "from-sky-500/80 to-blue-600/80",
-    bgGradient: "from-sky-500/20 to-transparent",
-    tagColor: "bg-sky-500",
-  },
-  {
-    name: "Beverages",
-    description: "Healthy, refreshing drinks & herbal infusions",
-    image: "/categories/beverages.jpg",
-    productCount: "10 Products",
-    gradient: "from-emerald-500/80 to-teal-600/80",
-    bgGradient: "from-emerald-500/20 to-transparent",
-    tagColor: "bg-emerald-500",
-  },
-  {
-    name: "Body",
-    description: "Complete body care for total wellness",
-    image: "/categories/body.jpg",
-    productCount: "15 Products",
-    gradient: "from-violet-500/80 to-purple-600/80",
-    bgGradient: "from-violet-500/20 to-transparent",
-    tagColor: "bg-violet-500",
-  },
-  {
-    name: "Food",
-    description: "Nutritious, wholesome natural food products",
-    image: "/categories/food.jpg",
-    productCount: "20 Products",
-    gradient: "from-red-500/80 to-rose-600/80",
-    bgGradient: "from-red-500/20 to-transparent",
-    tagColor: "bg-red-500",
-  },
-  {
-    name: "Health & Wellness",
-    description: "Your complete journey to natural wellness",
-    image: "/categories/health.jpg",
-    productCount: "25 Products",
-    gradient: "from-green-500/80 to-emerald-600/80",
-    bgGradient: "from-green-500/20 to-transparent",
-    tagColor: "bg-green-500",
-  },
-  {
-    name: "Poojas",
-    description: "Sacred essentials for spiritual rituals",
-    image: "/categories/poojas.jpg",
-    productCount: "14 Products",
-    gradient: "from-yellow-500/80 to-amber-600/80",
-    bgGradient: "from-yellow-500/20 to-transparent",
-    tagColor: "bg-yellow-500",
-  },
-];
+};
+
+// Define Category type based on API response
+interface Category {
+  id: number;
+  name: string;
+  image: string;
+  created_at?: string;
+  bgGradient?: string; // optional gradient class for overlay
+}
 
 const ShopByCategory = () => {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  };
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
-  };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await apiFetch("/api/categories/");
+        if (!response.ok) {
+          throw new Error(`Failed to fetch categories: ${response.status}`);
+        }
+        const data = await response.json();
+        setCategories(data);
+      } catch (err) {
+        console.error(err);
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
 
+  if (loading) {
+    return (
+      <section className="relative bg-[#12210f] py-20 md:py-28 overflow-hidden">
+        <div className="flex justify-center items-center h-64 text-white text-xl">
+          Loading categories...
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="relative bg-[#12210f] py-20 md:py-28 overflow-hidden">
+        <div className="flex flex-col justify-center items-center h-64 text-red-400 text-xl">
+          <p>Error loading categories:</p>
+          <pre className="mt-2">{error}</pre>
+          <button
+            className="mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded"
+            onClick={() => {
+              setLoading(true);
+              setError(null);
+              // Trigger refetch
+              const fetchCategories = async () => {
+                try {
+                  const response = await apiFetch("/api/categories/");
+                  if (!response.ok) throw new Error(`Failed: ${response.status}`);
+                  const data = await response.json();
+                  setCategories(data);
+                } catch (e) {
+                  setError((e as Error).message);
+                } finally {
+                  setLoading(false);
+                }
+              };
+              fetchCategories();
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  // Continue with UI rendering using fetched categories
   const featuredCategories = categories.slice(0, 2);
   const regularCategories = categories.slice(2);
 
@@ -160,7 +158,7 @@ const ShopByCategory = () => {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="grid md:grid-cols-2 gap-6 mb-6"
         >
-          {featuredCategories.map((category) => (
+          {featuredCategories.map((category: Category) => (
             <motion.div
               key={category.name}
               whileHover={{ y: -5 }}
@@ -176,21 +174,21 @@ const ShopByCategory = () => {
                     e.currentTarget.src = "/Placeholder.png";
                   }}
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t ${category.bgGradient} via-black/60 to-black/40`} />
+                <div className={`absolute inset-0 bg-gradient-to-t ${category.bgGradient ?? 'from-black/80 via-black/40 to-black/20'}`} />
               </div>
 
               {/* Content */}
               <div className="relative h-full flex flex-col justify-end p-8 md:p-10">
                 <div className="transform group-hover:translate-y-0 translate-y-2 transition-transform duration-500">
-                  <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full ${category.tagColor} text-white mb-4 shadow-lg`}>
-                    {category.productCount}
-                  </span>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-300 mb-6 max-w-md">
-                    {category.description}
-                  </p>
+                <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-emerald-500 text-white mb-4 shadow-lg">
+                  {/* Placeholder count */}
+                </span>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                  {category.name}
+                </h3>
+                <p className="text-gray-300 mb-6 max-w-md">
+                  {`Explore our ${category.name} collection`}
+                </p>
                   {
                     /* Wrap Explore Collection button in Link to dynamic route based on category name */
                     <Link to={`/${category.name.replace(/[\s&]+/g, '')}Products`}>
@@ -205,7 +203,7 @@ const ShopByCategory = () => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className={`absolute inset-0 bg-gradient-to-r ${category.gradient} mix-blend-overlay`} />
+                  <div className={`absolute inset-0 bg-gradient-to-r from-emerald-500/80 to-teal-600/80 mix-blend-overlay`} />
               </div>
             </motion.div>
           ))}
@@ -219,7 +217,7 @@ const ShopByCategory = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {regularCategories.map((category) => {
+          {regularCategories.map((category: Category) => {
             const path = category.name === "Poojas" ? "/PoojaProducts" : `/${category.name.replace(/[\s&]+/g, '')}Products`;
             return (
               <Link
@@ -248,15 +246,15 @@ const ShopByCategory = () => {
                   {/* Content */}
                   <div className="relative h-full flex flex-col justify-end p-6">
                     <div className="transform group-hover:translate-y-0 translate-y-1 transition-transform duration-500">
-                      <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full ${category.tagColor} text-white mb-3 shadow-lg`}>
-                        {category.productCount}
-                      </span>
-                      <h3 className="text-2xl font-bold text-white mb-2">
-                        {category.name}
-                      </h3>
-                      <p className="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        {category.description}
-                      </p>
+                    <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-emerald-500 text-white mb-3 shadow-lg">
+                      {/* Placeholder count */}
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {category.name}
+                    </h3>
+                    <p className="text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      {`Explore our ${category.name} collection`}
+                    </p>
                       <motion.button
                         whileHover={{ x: 5 }}
                         className="inline-flex items-center gap-2 text-emerald-400 font-semibold text-sm group/btn"
@@ -268,7 +266,7 @@ const ShopByCategory = () => {
                   </div>
 
                   {/* Hover Gradient Overlay */}
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t ${category.bgGradient}`} />
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t ${category.bgGradient ?? 'from-black/80 via-black/40 to-black/20'}`} />
                 </motion.div>
               </Link>
             );
@@ -305,4 +303,4 @@ const ShopByCategory = () => {
   );
 };
 
-export { ShopByCategory };
+export default ShopByCategory;

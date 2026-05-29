@@ -1,14 +1,13 @@
 import { ArrowUpRight, CirclePlay } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, invalidate } from "@react-three/fiber";
 import {
   OrbitControls,
-  Environment,
   useGLTF,
 } from "@react-three/drei";
 
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useEffect } from "react";
 import { Group } from "three";
 
 function AloeModel() {
@@ -20,6 +19,7 @@ function AloeModel() {
     if (ref.current) {
       ref.current.rotation.y += 0.004;
     }
+    invalidate(); // trigger render when using demand frameloop
   });
 
   return (
@@ -36,6 +36,11 @@ function AloeModel() {
 }
 
 export default function Hero() {
+  // Preload the GLB model once on mount for performance
+  useEffect(() => {
+    useGLTF.preload('/aloe1.glb');
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-[#04140b]">
 
@@ -294,32 +299,34 @@ export default function Hero() {
               {/* 3D MODEL */}
               <Canvas
                 className="h-full w-full"
+                frameloop="demand"
+                dpr={[1, 2]}
                 camera={{
                   position: [0, 0, 5],
                   fov: 40,
                 }}
-                gl={{
-                  antialias: true,
-                }}
+                gl={{ antialias: false }}
               >
-                <ambientLight intensity={1} />
+                {/* Preload the GLB model to avoid async lag */}
+                {/* Preload the GLB model – moved to useEffect */}
 
-                <directionalLight
-                  position={[5, 5, 5]}
-                  intensity={1.2}
-                />
+                <ambientLight intensity={1} />
+                <directionalLight position={[5, 5, 5]} intensity={1.2} />
 
                 <Suspense fallback={null}>
                   <AloeModel />
                 </Suspense>
 
+                {/* Keep auto‑rotate but trigger manual renders */}
                 <OrbitControls
                   enableZoom={false}
                   autoRotate
                   autoRotateSpeed={1.4}
+                  makeDefault
                 />
 
-                <Environment preset="sunset" />
+                {/* Simplified background – removed heavy Environment preset */}
+                {/* <Environment preset="sunset" /> */}
               </Canvas>
 
               {/* FLOATING CARD */}
