@@ -165,7 +165,7 @@ const DiscoverTheDifference = () => {
   };
 
   return (
-    <section className="relative bg-[#12210f] py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-white py-16 md:py-24 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
@@ -181,9 +181,9 @@ const DiscoverTheDifference = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 px-4"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-green-900 mb-6">
             Discover the{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
               Difference
             </span>
           </h2>

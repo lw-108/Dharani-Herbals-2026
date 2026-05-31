@@ -57,7 +57,7 @@ const Skiper47 = () => {
       <Carousel_001 
         className="" 
         products={products} 
-        showPagination 
+        // showPagination 
         loop 
         autoplay={true}
         spaceBetween={20}
@@ -71,7 +71,7 @@ export { Skiper47 };
 const Carousel_001 = ({
   products,
   className,
-  showPagination = false,
+  // showPagination = false,
   showNavigation = false,
   loop = true,
   autoplay = false,
@@ -79,7 +79,7 @@ const Carousel_001 = ({
 }: {
   products: { src: string; alt: string; name: string; description: string }[];
   className?: string;
-  showPagination?: boolean;
+  // showPagination?: boolean;
   showNavigation?: boolean;
   loop?: boolean;
   autoplay?: boolean;
@@ -179,7 +179,7 @@ const Carousel_001 = ({
             ? {
                 delay: 3000,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: true,
+                pauseOnMouseEnter: false,
               }
             : false
         }
@@ -196,14 +196,14 @@ const Carousel_001 = ({
           depth: 250,
           modifier: 1.2,
         }}
-        pagination={
-          showPagination
-            ? {
-                clickable: true,
-                dynamicBullets: true,
-              }
-            : false
-        }
+        // pagination={
+        //   showPagination
+        //     ? {
+        //         clickable: true,
+        //         dynamicBullets: false,
+        //       }
+        //     : false
+        // }
         navigation={
           showNavigation
             ? {

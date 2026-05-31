@@ -92,38 +92,38 @@ const TrendingProducts = () => {
   const getTagColor = (tag: string) => {
     switch (tag) {
       case "Hot":
-        return "from-orange-500 to-red-500 text-white shadow-orange-500/30";
+        return "bg-green-600 text-white";
       case "Popular":
-        return "from-blue-500 to-cyan-500 text-white shadow-blue-500/30";
+        return "bg-green-500 text-white";
       case "New":
-        return "from-green-500 to-emerald-500 text-white shadow-green-500/30";
+        return "bg-green-400 text-white";
       case "Trending":
-        return "from-purple-500 to-violet-500 text-white shadow-purple-500/30";
+        return "bg-green-700 text-white";
       default:
-        return "from-gray-500 to-gray-600 text-white shadow-gray-500/30";
+        return "bg-gray-500 text-white";
     }
   };
 
   const getBadgeColor = (badge: string) => {
     switch (badge) {
       case "Best Seller":
-        return "bg-amber-500/20 text-amber-400 border-amber-500/30";
+        return "bg-green-100 text-green-700 border-green-200";
       case "Top Rated":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        return "bg-green-50 text-green-700 border-green-200";
       case "Value Pick":
-        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
+        return "bg-green-100 text-green-600 border-green-200";
       case "Fresh":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-green-50 text-green-600 border-green-200";
       case "Gourmet":
-        return "bg-rose-500/20 text-rose-400 border-rose-500/30";
+        return "bg-green-100 text-green-700 border-green-200";
       case "Essential":
-        return "bg-sky-500/20 text-sky-400 border-sky-500/30";
+        return "bg-green-50 text-green-600 border-green-200";
       case "Wellness":
-        return "bg-teal-500/20 text-teal-400 border-teal-500/30";
+        return "bg-green-100 text-green-700 border-green-200";
       case "Trending":
-        return "bg-purple-500/20 text-purple-400 border-purple-500/30";
+        return "bg-green-50 text-green-600 border-green-200";
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+        return "bg-gray-100 text-gray-600 border-gray-200";
     }
   };
 
@@ -133,8 +133,8 @@ const TrendingProducts = () => {
         key={index}
         className={`w-3.5 h-3.5 ${
           index < Math.floor(rating)
-            ? "text-yellow-400 fill-yellow-400"
-            : "text-gray-600 fill-gray-600"
+            ? "text-green-600 fill-green-600"
+            : "text-green-200 fill-green-200"
         }`}
       />
     ));
@@ -152,12 +152,12 @@ const TrendingProducts = () => {
   };
 
   return (
-    <section className="relative bg-[#12210f] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-white py-20 md:py-28 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-b from-yellow-500/3 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-50 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-100/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-b from-green-50 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -175,29 +175,22 @@ const TrendingProducts = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.4 }}
-            className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-2 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20"
+            className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-2 rounded-full bg-green-100 text-green-700 border border-green-200"
           >
             <Flame className="w-4 h-4" />
             Trending Now
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-green-900 mb-6">
             Trending{" "}
             <span className="relative inline-block">
-              <span className="relative z-10 bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
                 Products
               </span>
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-                className="absolute bottom-1 left-0 right-0 h-2 bg-gradient-to-r from-orange-500/20 to-pink-500/20 rounded-full -rotate-1"
-              />
             </span>
           </h2>
 
-          <p className="max-w-2xl mx-auto text-lg text-gray-400 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-green-700 leading-relaxed">
             Discover what's popular right now — products that are making waves in the herbal wellness market
           </p>
 
@@ -217,8 +210,8 @@ const TrendingProducts = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeTab === tab.id
-                    ? "bg-white text-gray-900 shadow-lg"
-                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10"
+                    ? "bg-green-600 text-white shadow-lg shadow-green-200"
+                    : "bg-green-50 text-green-700 hover:bg-green-100 border border-green-200"
                 }`}
               >
                 {tab.label}
@@ -245,9 +238,9 @@ const TrendingProducts = () => {
                 onMouseLeave={() => setHoveredProduct(null)}
                 className="group relative"
               >
-                <div className="relative h-full bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/5 hover:border-orange-500/20 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-orange-500/5">
+                <div className="relative h-full bg-white rounded-2xl border-2 border-green-100 hover:border-green-400 transition-all duration-500 overflow-hidden hover:shadow-xl hover:shadow-green-100">
                   {/* Product Image Container */}
-                  <div className="relative aspect-square overflow-hidden bg-gradient-to-b from-gray-900/30 to-gray-800/30">
+                  <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-green-50 to-white">
                     <img
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                       src={product.image}
@@ -263,7 +256,7 @@ const TrendingProducts = () => {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
-                          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"
+                          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
                         >
                           <div className="absolute bottom-4 left-4 right-4 flex gap-2">
                             <motion.button
@@ -271,7 +264,7 @@ const TrendingProducts = () => {
                               animate={{ y: 0, opacity: 1 }}
                               exit={{ y: 20, opacity: 0 }}
                               transition={{ delay: 0.1 }}
-                              className="flex-1 flex items-center justify-center gap-2 bg-white text-gray-900 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-orange-500 hover:text-white transition-colors duration-300"
+                              className="flex-1 flex items-center justify-center gap-2 bg-white text-green-700 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-green-600 hover:text-white transition-colors duration-300"
                             >
                               <Eye className="w-4 h-4" />
                               Quick View
@@ -281,7 +274,7 @@ const TrendingProducts = () => {
                               animate={{ y: 0, opacity: 1 }}
                               exit={{ y: 20, opacity: 0 }}
                               transition={{ delay: 0.15 }}
-                              className="p-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-pink-500 transition-colors duration-300"
+                              className="p-2.5 bg-white/10 backdrop-blur-sm text-white rounded-xl hover:bg-red-500 transition-colors duration-300"
                             >
                               <Heart className="w-4 h-4" />
                             </motion.button>
@@ -294,9 +287,9 @@ const TrendingProducts = () => {
                     <div className="absolute top-3 left-3 flex flex-col gap-1.5">
                       {/* Tag Badge */}
                       <span
-                        className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r ${getTagColor(
+                        className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full shadow-lg ${getTagColor(
                           product.tag
-                        )} shadow-lg`}
+                        )}`}
                       >
                         {product.tag}
                       </span>
@@ -312,9 +305,9 @@ const TrendingProducts = () => {
                       <motion.div
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="w-8 h-8 rounded-full bg-orange-500/20 backdrop-blur-sm border border-orange-500/30 flex items-center justify-center"
+                        className="w-8 h-8 rounded-full bg-green-100 border border-green-200 flex items-center justify-center"
                       >
-                        <TrendingUp className="w-4 h-4 text-orange-400" />
+                        <TrendingUp className="w-4 h-4 text-green-600" />
                       </motion.div>
                     </div>
                   </div>
@@ -325,11 +318,11 @@ const TrendingProducts = () => {
                     {product.rating && (
                       <div className="flex items-center gap-2 mb-2">
                         {renderStars(product.rating)}
-                        <span className="text-sm font-semibold text-white">
+                        <span className="text-sm font-semibold text-green-700">
                           {product.rating}
                         </span>
                         {product.reviews && (
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-green-500">
                             ({product.reviews})
                           </span>
                         )}
@@ -337,15 +330,15 @@ const TrendingProducts = () => {
                     )}
 
                     {/* Product Name */}
-                    <h3 className="text-base font-semibold text-white group-hover:text-orange-400 transition-colors duration-300 mb-3 line-clamp-2 min-h-[48px]">
+                    <h3 className="text-base font-semibold text-green-900 group-hover:text-green-600 transition-colors duration-300 mb-3 line-clamp-2 min-h-[48px]">
                       {product.name}
                     </h3>
 
                     {/* Price and Actions */}
                     <div className="flex items-end justify-between">
                       <div className="flex flex-col">
-                        <span className="text-xs text-gray-500">Price</span>
-                        <span className="text-xl font-bold text-white">
+                        <span className="text-xs text-green-600">Price</span>
+                        <span className="text-xl font-bold text-green-900">
                           {product.price}
                         </span>
                       </div>
@@ -358,8 +351,8 @@ const TrendingProducts = () => {
                           onClick={() => handleAddToCart(product.id)}
                           className={`p-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                             addedToCart.includes(product.id)
-                              ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
-                              : "bg-white/5 text-gray-400 hover:bg-orange-500 hover:text-white border border-white/10 hover:border-orange-500"
+                              ? "bg-green-600 text-white shadow-lg shadow-green-200"
+                              : "bg-green-50 text-green-700 hover:bg-green-600 hover:text-white border border-green-200"
                           }`}
                         >
                           <ShoppingCart className="w-5 h-5" />
@@ -369,7 +362,7 @@ const TrendingProducts = () => {
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-semibold hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300"
+                          className="px-4 py-2.5 rounded-xl bg-green-600 text-white text-sm font-semibold hover:bg-green-700 shadow-md hover:shadow-lg transition-all duration-300"
                         >
                           Buy
                         </motion.button>
@@ -379,7 +372,7 @@ const TrendingProducts = () => {
 
                   {/* Shine Effect on Hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-2xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-orange-500/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-green-100/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </div>
                 </div>
               </motion.div>
@@ -398,14 +391,14 @@ const TrendingProducts = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30 hover:border-orange-500/50 transition-all duration-300 overflow-hidden"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green-600 text-white hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden"
           >
-            <Sparkles className="relative z-10 w-5 h-5 text-orange-400" />
-            <span className="relative z-10 text-orange-400 font-medium group-hover:text-white transition-colors">
+            <Sparkles className="relative z-10 w-5 h-5" />
+            <span className="relative z-10 font-medium">
               Browse Trending Items
             </span>
-            <ArrowRight className="relative z-10 w-5 h-5 text-orange-400 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/20 to-orange-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-400/20 to-green-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
           </motion.button>
         </motion.div>
       </div>

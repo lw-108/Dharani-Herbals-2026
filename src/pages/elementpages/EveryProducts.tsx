@@ -11,14 +11,17 @@ import {
     Grid3X3,
     List,
     Search,
-    Sparkles
+    Sparkles,
+    SlidersHorizontal,
+    Package,
+    ChevronLeft,
+    ChevronRight
 } from "lucide-react";
 import { useCartWishlist } from "@/context/CartWishlistContext";
 import { useLocation } from "react-router-dom";
 
-// All products data
+// All products data (same as before)
 const allProducts = [
-    // HAIR Products
     { id: 1, name: "Hibiscus Herbal Hair Oil", tag: "Hot", rating: null, reviews: null, price: "₹115 - ₹460", image: "/products/hibiscus-hair-oil.png", category: "HAIR", brand: "MAKIL", type: "hot" },
     { id: 2, name: "VETTIVER SHAMPOO", tag: "Trending", rating: null, reviews: null, price: "₹70", image: "/products/vettiver-shampoo.png", category: "HAIR", brand: "RAMCARE", type: "trending" },
     { id: 3, name: "ALOE VERA SHAMPOO", tag: "Deals", rating: null, reviews: null, price: "₹65 - ₹130", image: "/products/aloe-vera-shampoo.png", category: "HAIR", brand: "VANA ARASI", type: "deals" },
@@ -26,44 +29,30 @@ const allProducts = [
     { id: 5, name: "ONION SHAMPOO", tag: "Trending", rating: 5.0, reviews: 1, price: "₹65 - ₹240", image: "/products/onion-shampoo.png", category: "HAIR", brand: "VEDAN", type: "trending" },
     { id: 6, name: "ARAPPU SHAMPOO", tag: "Popular", rating: null, reviews: null, price: "₹65 - ₹130", image: "/products/arappu-shampoo.png", category: "HAIR", brand: "ATHIYAMAN", type: "popular" },
     { id: 7, name: "RICE KANJI SHAMPOO", tag: "Best Selling", rating: 5.0, reviews: 2, price: "₹75 - ₹150", image: "/products/rice-kanji-shampoo.png", category: "HAIR", brand: "NIRAI HOMAM", type: "best-selling" },
-
-    // SKIN Products
     { id: 8, name: "FACEPACK POWDER JAR 100G", tag: "Best Selling", rating: 5.0, reviews: 3, price: "₹58", image: "/products/facepack-powder-jar.png", category: "SKIN", brand: "MAKIL", type: "best-selling" },
     { id: 9, name: "MULTHANI METTI SOAP", tag: "Deals", rating: 5.0, reviews: 1, price: "₹50", image: "/products/multhani-metti-soap.png", category: "SKIN", brand: "DIVYAM", type: "deals" },
     { id: 10, name: "ROSE SOAP", tag: "Hot", rating: 5.0, reviews: 1, price: "₹55", image: "/products/rose-soap.png", category: "SKIN", brand: "VANA ARASI", type: "hot" },
     { id: 11, name: "ALOE VERA SOAP", tag: "Popular", rating: 5.0, reviews: 1, price: "₹50", image: "/products/aloe-vera-soap.png", category: "SKIN", brand: "VEDAN AMUTHU", type: "popular" },
     { id: 12, name: "NALANGU POWDER JAR", tag: "Best Selling", rating: 5.0, reviews: 1, price: "₹60 - ₹145", image: "/products/nalangu-powder-jar.png", category: "SKIN", brand: "VEDAN", type: "best-selling" },
-
-    // BABY Products
     { id: 13, name: "AVARAMPOO BABY SHAMPOO", tag: "Trending", rating: null, reviews: null, price: "₹75", image: "/products/avarampoo-baby-shampoo.png", category: "BABY", brand: "MAKIL", type: "trending" },
     { id: 14, name: "AVARAMPOO BABY SOAP", tag: "Hot", rating: 5.0, reviews: 1, price: "₹60", image: "/products/avarampoo-baby-soap.png", category: "BABY", brand: "RAMCARE", type: "hot" },
-
-    // BEVERAGES Products
     { id: 15, name: "Aavaram Flower Tea", tag: "Popular", rating: null, reviews: null, price: "₹70", image: "/products/aavaram-flower-tea.png", category: "BEVERAGES", brand: "MAKIL", type: "popular" },
     { id: 16, name: "BLACK TEA (G)", tag: "Popular", rating: null, reviews: null, price: "₹60", image: "/products/black-tea.png", category: "BEVERAGES", brand: "RAMCARE", type: "popular" },
     { id: 17, name: "Guava Leaf Tea", tag: "Popular", rating: null, reviews: null, price: "₹80", image: "/products/guava-leaf-tea.png", category: "BEVERAGES", brand: "DIVYAM", type: "popular" },
     { id: 18, name: "Herbal Tea Powder", tag: "Trending", rating: null, reviews: null, price: "₹50", image: "/products/herbal-tea-powder.png", category: "BEVERAGES", brand: "NIRAI HOMAM", type: "trending" },
     { id: 19, name: "Vilvam Sherbet", tag: "Popular", rating: null, reviews: null, price: "₹67", image: "/products/vilvam-sherbet.png", category: "BEVERAGES", brand: "VANA ARASI", type: "popular" },
-
-    // BODY Products
     { id: 20, name: "COCONUT MILK SOAP", tag: "Deals", rating: null, reviews: null, price: "₹60", image: "/products/coconut-milk-soap.png", category: "BODY", brand: "DIVYAM", type: "deals" },
     { id: 21, name: "CLAY SOAP", tag: "Popular", rating: null, reviews: null, price: "₹60", image: "/products/clay-soap.png", category: "BODY", brand: "VANA ARASI", type: "popular" },
     { id: 22, name: "CHARCOAL SOAP", tag: "Popular", rating: null, reviews: null, price: "₹55", image: "/products/charcoal-soap.png", category: "BODY", brand: "VEDAN", type: "popular" },
     { id: 23, name: "GREEN GRAM SOAP", tag: "Popular", rating: null, reviews: null, price: "₹60", image: "/products/green-gram-soap.png", category: "BODY", brand: "MAKIL", type: "popular" },
-
-    // FOOD Products
     { id: 24, name: "LEMON PICKLE (JAR)", tag: "Trending", rating: null, reviews: null, price: "₹45", image: "/products/lemon-pickle-jar.png", category: "FOOD", brand: "MAKIL", type: "trending" },
     { id: 25, name: "Banana Blossom Pickle", tag: "Trending", rating: null, reviews: null, price: "₹55 - ₹105", image: "/products/banana-blossom-pickle.png", category: "FOOD", brand: "VANA ARASI", type: "trending" },
     { id: 26, name: "WILD HONEY JAR(NR)", tag: "Popular", rating: null, reviews: null, price: "₹75", image: "/products/wild-honey-jar.png", category: "FOOD", brand: "DIVYAM", type: "popular" },
     { id: 27, name: "MAPPILLAI SAMBA RICE", tag: "Popular", rating: null, reviews: null, price: "₹65", image: "/products/mappillai-samba-rice.png", category: "FOOD", brand: "VEDAN AMUTHU", type: "popular" },
-
-    // HEALTH & WELLNESS Products
     { id: 28, name: "SPROUTED MULTIGRAIN HEALTH MIX", tag: "Best Selling", rating: 5.0, reviews: 3, price: "₹180 - ₹360", image: "/products/sprouted-health-mix.png", category: "HEALTH & WELLNESS", brand: "VEDAN", type: "best-selling" },
     { id: 29, name: "BEETROOT MALT (JAR)", tag: "Hot", rating: null, reviews: null, price: "₹235", image: "/products/beetroot-malt.png", category: "HEALTH & WELLNESS", brand: "ATHIYAMAN", type: "hot" },
     { id: 30, name: "CARROT MALT (JAR)", tag: "Hot", rating: null, reviews: null, price: "₹113", image: "/products/carrot-malt.png", category: "HEALTH & WELLNESS", brand: "NIRAI HOMAM", type: "hot" },
     { id: 31, name: "Wild Turmeric", tag: "Popular", rating: null, reviews: null, price: "₹35 - ₹65", image: "/products/wild-turmeric.png", category: "HEALTH & WELLNESS", brand: "MAKIL", type: "popular" },
-
-    // POOJAS Products
     { id: 32, name: "27 Types of Homa Offerings", tag: "Popular", rating: null, reviews: null, price: "₹80", image: "/products/homa-offerings-27.png", category: "POOJAS", brand: "MAKIL", type: "popular" },
     { id: 33, name: "DEEPA OIL", tag: "Popular", rating: null, reviews: null, price: "₹95 - ₹225", image: "/products/deepa-oil.png", category: "POOJAS", brand: "RAMCARE", type: "popular" },
     { id: 34, name: "54 VAGAI HOMA THIRAVIYANGAL", tag: "Trending", rating: null, reviews: null, price: "₹175", image: "/products/homa-thiraviyangal-54.png", category: "POOJAS", brand: "DIVYAM", type: "trending" },
@@ -86,7 +75,6 @@ const brands = ["All Brands", "MAKIL", "RAMCARE", "DIVYAM", "VANA ARASI", "VEDAN
 
 const productTypes = [
     { value: "all", label: "All Types", icon: null },
-    { value: "new-launch", label: "New Launch", icon: "✨" },
     { value: "best-selling", label: "Best Selling", icon: "🔥" },
     { value: "deals", label: "Deals", icon: "🏷️" },
     { value: "trending", label: "Trending", icon: "📈" },
@@ -94,7 +82,7 @@ const productTypes = [
     { value: "popular", label: "Popular", icon: "⭐" },
 ];
 
-const sortOptions = ["Random", "Price: Low to High", "Price: High to Low", "Newest", "Best Rating", "Popularity"];
+const sortOptions = ["Default", "Price: Low to High", "Price: High to Low", "Best Rating"];
 
 const AllProductsPage = () => {
     const { addToCart, toggleWishlist, isInWishlist } = useCartWishlist();
@@ -106,60 +94,84 @@ const AllProductsPage = () => {
     };
 
     const [selectedCategory, setSelectedCategory] = useState(getInitialCategory());
+    const [selectedBrand, setSelectedBrand] = useState("All Brands");
+    const [selectedType, setSelectedType] = useState("all");
+    const [sortBy, setSortBy] = useState("Default");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+    const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+    // Category scroll state
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(true);
+    const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+    // Get navbar height for sticky positioning
+    const [navbarHeight, setNavbarHeight] = useState(0);
+
+    // Toast notification
+    const [toastMessage, setToastMessage] = useState<string | null>(null);
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const cat = params.get("category");
-        if (cat) {
-            setSelectedCategory(cat);
-        } else {
-            setSelectedCategory("all");
-        }
+        if (cat) setSelectedCategory(cat);
     }, [location.search]);
 
-    const [selectedBrand, setSelectedBrand] = useState("All Brands");
-    const [selectedType, setSelectedType] = useState("all");
-    const [sortBy, setSortBy] = useState("Random");
-    const [searchQuery, setSearchQuery] = useState("");
-    const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-    const [addedToCart, setAddedToCart] = useState<number[]>([]);
-    const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-
-    // Toast notification state
-    const [toastMessage, setToastMessage] = useState<string | null>(null);
-    const [toastType, setToastType] = useState<"cart" | "wishlist">("cart");
-
-    const showToast = (message: string, type: "cart" | "wishlist") => {
-        setToastMessage(message);
-        setToastType(type);
-    };
-
-    // Auto-clear toast
     useEffect(() => {
         if (toastMessage) {
-            const timer = setTimeout(() => setToastMessage(null), 2500);
+            const timer = setTimeout(() => setToastMessage(null), 2000);
             return () => clearTimeout(timer);
         }
     }, [toastMessage]);
-    const [isFilterSticky, setIsFilterSticky] = useState(false);
-    const filterRef = useRef<HTMLDivElement>(null);
-    const filterSentinelRef = useRef<HTMLDivElement>(null);
 
-    // Sticky filter observer
+    // Calculate navbar height on mount and resize
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setIsFilterSticky(!entry.isIntersecting);
-            },
-            { threshold: 0, rootMargin: "-80px 0px 0px 0px" }
-        );
+        const calculateNavbarHeight = () => {
+            const navbar = document.querySelector('nav');
+            if (navbar) {
+                setNavbarHeight(navbar.offsetHeight);
+            } else {
+                // Fallback height if navbar not found
+                setNavbarHeight(64); // Default navbar height (adjust as needed)
+            }
+        };
 
-        if (filterSentinelRef.current) {
-            observer.observe(filterSentinelRef.current);
-        }
-
-        return () => observer.disconnect();
+        calculateNavbarHeight();
+        window.addEventListener('resize', calculateNavbarHeight);
+        return () => window.removeEventListener('resize', calculateNavbarHeight);
     }, []);
+
+    // Check scroll position for arrows
+    const checkScroll = () => {
+        if (categoryScrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = categoryScrollRef.current;
+            setShowLeftArrow(scrollLeft > 0);
+            setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    };
+
+    useEffect(() => {
+        checkScroll();
+        window.addEventListener('resize', checkScroll);
+        return () => window.removeEventListener('resize', checkScroll);
+    }, []);
+
+    const scrollCategories = (direction: 'left' | 'right') => {
+        if (categoryScrollRef.current) {
+            const scrollAmount = 300;
+            const newScrollLeft = direction === 'left' 
+                ? categoryScrollRef.current.scrollLeft - scrollAmount
+                : categoryScrollRef.current.scrollLeft + scrollAmount;
+            
+            categoryScrollRef.current.scrollTo({
+                left: newScrollLeft,
+                behavior: 'smooth'
+            });
+
+            setTimeout(checkScroll, 300);
+        }
+    };
 
     // Filter and sort products
     const filteredProducts = allProducts.filter((product) => {
@@ -186,477 +198,410 @@ const AllProductsPage = () => {
         }
     });
 
-    const getTagColor = (tag: string) => {
-        const colors: Record<string, string> = {
-            "Best Selling": "from-amber-500 to-yellow-500 text-white",
-            "Popular": "from-blue-500 to-cyan-500 text-white",
-            "Deals": "from-red-500 to-pink-500 text-white",
-            "Trending": "from-purple-500 to-violet-500 text-white",
-            "Hot": "from-orange-500 to-red-500 text-white",
-        };
-        return colors[tag] || "from-gray-500 to-gray-600 text-white";
+    const clearAllFilters = () => {
+        setSelectedCategory("all");
+        setSelectedBrand("All Brands");
+        setSelectedType("all");
+        setSortBy("Default");
+        setSearchQuery("");
     };
 
-    const getCategoryColor = (category: string) => {
-        const colors: Record<string, string> = {
-            "HAIR": "bg-amber-500/10 text-amber-400 border-amber-500/20",
-            "SKIN": "bg-rose-500/10 text-rose-400 border-rose-500/20",
-            "BABY": "bg-sky-500/10 text-sky-400 border-sky-500/20",
-            "BEVERAGES": "bg-amber-500/10 text-amber-400 border-amber-500/20",
-            "BODY": "bg-violet-500/10 text-violet-400 border-violet-500/20",
-            "FOOD": "bg-red-500/10 text-red-400 border-red-500/20",
-            "HEALTH & WELLNESS": "bg-green-500/10 text-green-400 border-green-500/20",
-            "POOJAS": "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
-        };
-        return colors[category] || "bg-gray-500/10 text-gray-400 border-gray-500/20";
-    };
+    const hasActiveFilters = selectedCategory !== "all" || selectedBrand !== "All Brands" || selectedType !== "all" || searchQuery !== "";
 
     const renderStars = (rating: number | null) => {
         if (!rating) return null;
         return (
             <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }, (_, i) => (
-                    <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(rating) ? "text-yellow-400 fill-yellow-400" : "text-gray-600 fill-gray-600"}`} />
+                    <Star
+                        key={i}
+                        className={`w-3 h-3 ${i < Math.floor(rating) ? "text-green-600 fill-green-600" : "text-green-200 fill-green-200"}`}
+                    />
                 ))}
             </div>
         );
     };
 
-    const handleAddToCart = (productId: number) => {
-        const prod = allProducts.find(p => p.id === productId);
-        if (prod) {
-            addToCart(prod);
-            showToast(`Added ${prod.name} to Cart!`, "cart");
-        }
-        setAddedToCart((prev) => [...prev, productId]);
+    const handleAddToCart = (product: any) => {
+        addToCart(product);
+        setToastMessage(`${product.name} added to cart!`);
     };
 
     const handleToggleWishlist = (product: any) => {
         toggleWishlist(product);
-        const inWishlist = isInWishlist(product.id);
-        if (inWishlist) {
-            showToast(`Removed ${product.name} from Wishlist`, "wishlist");
-        } else {
-            showToast(`Added ${product.name} to Wishlist!`, "wishlist");
-        }
+        setToastMessage(isInWishlist(product.id) ? "Removed from wishlist" : "Added to wishlist!");
     };
 
     const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
         e.currentTarget.src = "/Placeholder.png";
     };
 
-    const clearAllFilters = () => {
-        setSelectedCategory("all");
-        setSelectedBrand("All Brands");
-        setSelectedType("all");
-        setSortBy("Random");
-        setSearchQuery("");
+    const handleQuickView = (product: any) => {
+        // Implement quick view modal here
+        console.log("Quick view:", product.name);
     };
 
-    const hasActiveFilters = selectedCategory !== "all" || selectedBrand !== "All Brands" || selectedType !== "all" || searchQuery !== "";
-
-    const FilterBar = ({ isSticky = false }: { isSticky?: boolean }) => (
-        <div className={`${isSticky ? 'fixed top-0 left-0 right-0 z-40 bg-[#0a0f09]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/50 animate-slideDown' : ''}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col gap-4 py-4">
-                    {/* Search Bar */}
-                    <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
-                        />
-                        {searchQuery && (
-                            <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
-                                <X className="w-4 h-4" />
-                            </button>
-                        )}
-                    </div>
-
-                    {/* Category Pills - Horizontally Scrollable */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4">
-                        {categories.map((cat) => (
-                            <motion.button
-                                key={cat.id}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setSelectedCategory(cat.id)}
-                                className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${selectedCategory === cat.id
-                                    ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/25"
-                                    : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10"
-                                    }`}
-                            >
-                                <span>{cat.icon}</span>
-                                <span className="hidden sm:inline">{cat.label}</span>
-                                {cat.id !== "all" && (
-                                    <span className="text-xs opacity-60">
-                                        ({allProducts.filter(p => p.category === cat.id).length})
-                                    </span>
-                                )}
-                            </motion.button>
-                        ))}
-                    </div>
-
-                    {/* Sort & Filter Row */}
-                    <div className="flex items-center gap-3 flex-wrap">
-                        <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-400">
-                                {filteredProducts.length} products
-                            </span>
-                        </div>
-
-                        <div className="flex-1" />
-
-                        {/* Brand Filter */}
-                        <select
-                            value={selectedBrand}
-                            onChange={(e) => setSelectedBrand(e.target.value)}
-                            className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500/50 cursor-pointer"
-                        >
-                            {brands.map((brand) => (
-                                <option key={brand} value={brand} className="bg-gray-900">{brand}</option>
-                            ))}
-                        </select>
-
-                        {/* Type Filter */}
-                        <select
-                            value={selectedType}
-                            onChange={(e) => setSelectedType(e.target.value)}
-                            className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500/50 cursor-pointer"
-                        >
-                            {productTypes.map((type) => (
-                                <option key={type.value} value={type.value} className="bg-gray-900">
-                                    {type.icon ? `${type.icon} ` : ""}{type.label}
-                                </option>
-                            ))}
-                        </select>
-
-                        {/* Sort */}
-                        <select
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500/50 cursor-pointer"
-                        >
-                            {sortOptions.map((option) => (
-                                <option key={option} value={option} className="bg-gray-900">{option}</option>
-                            ))}
-                        </select>
-
-                        {/* View Toggle */}
-                        <div className="hidden sm:flex items-center bg-white/5 rounded-xl border border-white/10 p-1">
-                            <button
-                                onClick={() => setViewMode("grid")}
-                                className={`p-2 rounded-lg transition-colors ${viewMode === "grid" ? "bg-emerald-500/20 text-emerald-400" : "text-gray-400 hover:text-white"}`}
-                            >
-                                <Grid3X3 className="w-4 h-4" />
-                            </button>
-                            <button
-                                onClick={() => setViewMode("list")}
-                                className={`p-2 rounded-lg transition-colors ${viewMode === "list" ? "bg-emerald-500/20 text-emerald-400" : "text-gray-400 hover:text-white"}`}
-                            >
-                                <List className="w-4 h-4" />
-                            </button>
-                        </div>
-
-                        {/* Clear Filters */}
-                        {hasActiveFilters && (
-                            <motion.button
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                onClick={clearAllFilters}
-                                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium hover:bg-red-500/20 transition-colors"
-                            >
-                                <X className="w-3.5 h-3.5" />
-                                Clear
-                            </motion.button>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-
     return (
-        <section className="relative bg-[#0a0f09] min-h-screen">
-            {/* Background Effects */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/3 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-green-500/3 rounded-full blur-3xl" />
-            </div>
-
-            <div className="relative">
-                {/* Page Header */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+        <section className="min-h-screen bg-gradient-to-b from-green-50 via-white to-green-50 overflow-hidden">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-green-800 to-green-600">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-center mb-4"
+                        className="text-center"
                     >
-                        <div className="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
                             <Sparkles className="w-4 h-4" />
-                            Our Products
+                            Natural & Chemical-Free Products
                         </div>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-                            Explore Our{" "}
-                            <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                            Our Premium{" "}
+                            <span className="relative">
                                 Collection
+                                <span className="absolute bottom-1 left-0 right-0 h-3 bg-green-400/30 -z-10"></span>
                             </span>
                         </h1>
-                        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                            Discover our complete range of natural, chemical-free products for your wellness journey
+                        <p className="text-green-100 text-lg max-w-2xl mx-auto">
+                            Discover pure, natural products crafted with traditional wisdom for your complete wellness
                         </p>
                     </motion.div>
                 </div>
+            </div>
 
-                {/* Sentinel for sticky detection */}
-                <div ref={filterSentinelRef} className="h-1" />
+            {/* Sticky Search & Filters - Positioned below navbar */}
+            <div 
+                className="sticky z-40 bg-white/95 backdrop-blur-md border-b border-green-100 shadow-sm"
+                style={{ top: `${navbarHeight}px` }}
+            >
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    {/* Search Bar */}
+                    <div className="flex flex-col md:flex-row gap-4 mb-4">
+                        <div className="relative flex-1">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-400" />
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full pl-12 pr-4 py-3 bg-green-50/50 border-2 border-green-100 rounded-2xl text-green-900 placeholder-green-400 focus:outline-none focus:border-green-500 transition-all"
+                            />
+                            {searchQuery && (
+                                <button
+                                    onClick={() => setSearchQuery("")}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-green-400 hover:text-green-600"
+                                >
+                                    <X className="w-4 h-4" />
+                                </button>
+                            )}
+                        </div>
 
-                {/* Sticky Filter Bar */}
-                <div ref={filterRef}>
-                    <AnimatePresence>
-                        {isFilterSticky && (
-                            <motion.div
-                                initial={{ y: -100, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                exit={{ y: -100, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
+                        <div className="flex gap-2">
+                            {/* Mobile Filter Button */}
+                            <button
+                                onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                                className="md:hidden flex items-center gap-2 px-4 py-3 bg-green-50 border-2 border-green-100 rounded-2xl text-green-700 font-medium"
                             >
-                                <FilterBar isSticky={true} />
-                            </motion.div>
+                                <SlidersHorizontal className="w-5 h-5" />
+                                Filters
+                            </button>
+
+                            {/* Brand Filter */}
+                            <select
+                                value={selectedBrand}
+                                onChange={(e) => setSelectedBrand(e.target.value)}
+                                className="hidden md:block px-4 py-3 bg-green-50/50 border-2 border-green-100 rounded-2xl text-green-700 font-medium focus:outline-none focus:border-green-500 cursor-pointer"
+                            >
+                                {brands.map((brand) => (
+                                    <option key={brand} value={brand}>{brand}</option>
+                                ))}
+                            </select>
+
+                            {/* Type Filter */}
+                            <select
+                                value={selectedType}
+                                onChange={(e) => setSelectedType(e.target.value)}
+                                className="hidden md:block px-4 py-3 bg-green-50/50 border-2 border-green-100 rounded-2xl text-green-700 font-medium focus:outline-none focus:border-green-500 cursor-pointer"
+                            >
+                                {productTypes.map((type) => (
+                                    <option key={type.value} value={type.value}>
+                                        {type.icon ? `${type.icon} ` : ""}{type.label}
+                                    </option>
+                                ))}
+                            </select>
+
+                            {/* Sort */}
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="px-4 py-3 bg-green-50/50 border-2 border-green-100 rounded-2xl text-green-700 font-medium focus:outline-none focus:border-green-500 cursor-pointer"
+                            >
+                                {sortOptions.map((option) => (
+                                    <option key={option} value={option}>{option}</option>
+                                ))}
+                            </select>
+
+                            {/* View Toggle */}
+                            <div className="hidden sm:flex bg-green-50/50 border-2 border-green-100 rounded-2xl p-1">
+                                <button
+                                    onClick={() => setViewMode("grid")}
+                                    className={`p-2 rounded-xl transition-all ${viewMode === "grid" ? "bg-green-600 text-white shadow-md" : "text-green-600 hover:bg-green-100"}`}
+                                >
+                                    <Grid3X3 className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={() => setViewMode("list")}
+                                    className={`p-2 rounded-xl transition-all ${viewMode === "list" ? "bg-green-600 text-white shadow-md" : "text-green-600 hover:bg-green-100"}`}
+                                >
+                                    <List className="w-4 h-4" />
+                                </button>
+                            </div>
+
+                            {hasActiveFilters && (
+                                <button
+                                    onClick={clearAllFilters}
+                                    className="flex items-center gap-1 px-4 py-3 bg-red-50 border-2 border-red-200 rounded-2xl text-red-600 font-medium hover:bg-red-100 transition-all"
+                                >
+                                    <X className="w-4 h-4" />
+                                    <span className="hidden sm:inline">Clear</span>
+                                </button>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Category Pills with Chevron Navigation */}
+                    <div className="relative">
+                        {/* Left Arrow */}
+                        {showLeftArrow && (
+                            <button
+                                onClick={() => scrollCategories('left')}
+                                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow-lg rounded-full text-green-600 hover:bg-green-50 transition-all hidden md:flex items-center justify-center"
+                            >
+                                <ChevronLeft className="w-5 h-5" />
+                            </button>
                         )}
-                    </AnimatePresence>
-                </div>
 
-                {/* Regular Filter Bar (when not sticky) */}
-                {!isFilterSticky && <FilterBar />}
-
-                {/* Active Filters Tags */}
-                {hasActiveFilters && (
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-                        <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="flex flex-wrap items-center gap-2"
+                        {/* Scrollable Categories */}
+                        <div
+                            ref={categoryScrollRef}
+                            onScroll={checkScroll}
+                            className="flex items-center gap-2 overflow-x-auto scrollbar-hide px-0 md:px-10"
                         >
-                            <span className="text-xs text-gray-500">Active Filters:</span>
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setSelectedCategory(cat.id)}
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all flex-shrink-0 ${
+                                        selectedCategory === cat.id
+                                            ? "bg-green-600 text-white shadow-lg shadow-green-200"
+                                            : "bg-green-50 text-green-700 hover:bg-green-100 border border-green-200"
+                                    }`}
+                                >
+                                    <span>{cat.icon}</span>
+                                    <span className="hidden sm:inline">{cat.label}</span>
+                                    {cat.id !== "all" && (
+                                        <span className="text-xs opacity-75">
+                                            ({allProducts.filter(p => p.category === cat.id).length})
+                                        </span>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Right Arrow */}
+                        {showRightArrow && (
+                            <button
+                                onClick={() => scrollCategories('right')}
+                                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow-lg rounded-full text-green-600 hover:bg-green-50 transition-all hidden md:flex items-center justify-center"
+                            >
+                                <ChevronRight className="w-5 h-5" />
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Product Count & Active Filters */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                    <p className="text-green-700 font-medium">
+                        Showing <span className="text-green-900 font-bold">{filteredProducts.length}</span> products
+                    </p>
+                    
+                    {hasActiveFilters && (
+                        <div className="flex flex-wrap gap-2">
                             {selectedCategory !== "all" && (
-                                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20">
+                                <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
                                     {categories.find(c => c.id === selectedCategory)?.icon} {categories.find(c => c.id === selectedCategory)?.label}
-                                    <button onClick={() => setSelectedCategory("all")}><X className="w-3 h-3" /></button>
+                                    <button onClick={() => setSelectedCategory("all")}>
+                                        <X className="w-3 h-3" />
+                                    </button>
                                 </span>
                             )}
                             {selectedBrand !== "All Brands" && (
-                                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20">
+                                <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
                                     {selectedBrand}
-                                    <button onClick={() => setSelectedBrand("All Brands")}><X className="w-3 h-3" /></button>
+                                    <button onClick={() => setSelectedBrand("All Brands")}>
+                                        <X className="w-3 h-3" />
+                                    </button>
                                 </span>
                             )}
                             {selectedType !== "all" && (
-                                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20">
+                                <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
                                     {productTypes.find(t => t.value === selectedType)?.icon} {productTypes.find(t => t.value === selectedType)?.label}
-                                    <button onClick={() => setSelectedType("all")}><X className="w-3 h-3" /></button>
+                                    <button onClick={() => setSelectedType("all")}>
+                                        <X className="w-3 h-3" />
+                                    </button>
                                 </span>
                             )}
-                        </motion.div>
-                    </div>
-                )}
-
-                {/* Products Grid */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <motion.div
-                        layout
-                        className={`grid gap-6 ${viewMode === "grid"
-                            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                            : "grid-cols-1"
-                            }`}
-                    >
-                        <AnimatePresence mode="popLayout">
-                            {sortedProducts.map((product, index) => (
-                                <motion.div
-                                    key={product.id}
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ delay: index * 0.03, duration: 0.3 }}
-                                    onMouseEnter={() => setHoveredProduct(product.id)}
-                                    onMouseLeave={() => setHoveredProduct(null)}
-                                    className="group relative"
-                                >
-                                    <div className="relative h-full bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/5 hover:border-emerald-500/20 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/5">
-                                        <div className={`relative ${viewMode === "list" ? "w-48 flex-shrink-0" : "aspect-square"} overflow-hidden bg-gradient-to-b from-gray-900/30 to-gray-800/30`}>
-                                            <img
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                                src={product.image}
-                                                alt={product.name}
-                                                onError={handleImageError}
-                                                loading="lazy"
-                                            />
-                                            <AnimatePresence>
-                                                {hoveredProduct === product.id && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0 }}
-                                                        animate={{ opacity: 1 }}
-                                                        exit={{ opacity: 0 }}
-                                                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
-                                                    >
-                                                        <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-                                                            <motion.button
-                                                                initial={{ y: 20, opacity: 0 }}
-                                                                animate={{ y: 0, opacity: 1 }}
-                                                                exit={{ y: 20, opacity: 0 }}
-                                                                className="flex-1 flex items-center justify-center gap-2 bg-white text-gray-900 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-emerald-500 hover:text-white transition-colors"
-                                                            >
-                                                                <Eye className="w-4 h-4" />
-                                                                Quick View
-                                                            </motion.button>
-                                                            <motion.button
-                                                                initial={{ y: 20, opacity: 0 }}
-                                                                animate={{ y: 0, opacity: 1 }}
-                                                                exit={{ y: 20, opacity: 0 }}
-                                                                onClick={() => handleToggleWishlist(product)}
-                                                                className={`p-2.5 backdrop-blur-sm rounded-xl transition-colors ${
-                                                                    isInWishlist(product.id)
-                                                                        ? "bg-red-500 text-white"
-                                                                        : "bg-white/10 text-white hover:bg-red-500"
-                                                                }`}
-                                                            >
-                                                                <Heart className={`w-4 h-4 ${isInWishlist(product.id) ? "fill-white" : ""}`} />
-                                                            </motion.button>
-                                                        </div>
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-
-                                            <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                                                <span className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-gradient-to-r ${getTagColor(product.tag)} shadow-lg`}>
-                                                    {product.tag}
-                                                </span>
-                                                <span className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full border ${getCategoryColor(product.category)}`}>
-                                                    {product.category}
-                                                </span>
-                                            </div>
-
-                                            {product.tag === "Deals" && (
-                                                <div className="absolute top-3 right-3">
-                                                    <span className="inline-block text-xs font-bold px-2 py-1 rounded-full bg-red-500 text-white shadow-lg shadow-red-500/30">
-                                                        -15%
-                                                    </span>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className={`p-5 ${viewMode === "list" ? "flex-1 flex flex-col justify-between" : ""}`}>
-                                            <div>
-                                                {product.rating && (
-                                                    <div className="flex items-center gap-2 mb-2">
-                                                        {renderStars(product.rating)}
-                                                        <span className="text-sm font-semibold text-white">{product.rating}</span>
-                                                        {product.reviews && (
-                                                            <span className="text-xs text-gray-500">({product.reviews})</span>
-                                                        )}
-                                                    </div>
-                                                )}
-                                                <h3 className="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors mb-1 line-clamp-2">
-                                                    {product.name}
-                                                </h3>
-                                                <p className="text-xs text-gray-500 mb-3">{product.brand}</p>
-                                            </div>
-
-                                            <div>
-                                                <span className="text-lg font-bold text-white block mb-3">{product.price}</span>
-                                                <div className="flex items-center gap-2">
-                                                    <motion.button
-                                                        whileHover={{ scale: 1.02 }}
-                                                        whileTap={{ scale: 0.98 }}
-                                                        onClick={() => handleAddToCart(product.id)}
-                                                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-300 ${addedToCart.includes(product.id)
-                                                            ? "bg-emerald-500 text-white"
-                                                            : "bg-white/5 text-gray-400 hover:bg-emerald-500 hover:text-white border border-white/10"
-                                                            }`}
-                                                    >
-                                                        <ShoppingCart className="w-3.5 h-3.5" />
-                                                        {addedToCart.includes(product.id) ? "Added!" : "Add to Cart"}
-                                                    </motion.button>
-                                                    <motion.button
-                                                        whileHover={{ scale: 1.02 }}
-                                                        whileTap={{ scale: 0.98 }}
-                                                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-500 text-white text-xs font-semibold hover:shadow-lg hover:shadow-emerald-500/25 transition-all"
-                                                    >
-                                                        Buy Now
-                                                    </motion.button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-2xl overflow-hidden">
-                                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-emerald-500/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </AnimatePresence>
-                    </motion.div>
-
-                    {/* Empty State */}
-                    {filteredProducts.length === 0 && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-center py-20"
-                        >
-                            <span className="text-6xl block mb-4">🔍</span>
-                            <p className="text-gray-400 text-lg">No products found matching your filters.</p>
-                            <button
-                                onClick={clearAllFilters}
-                                className="mt-4 text-emerald-400 hover:text-emerald-300 font-medium"
-                            >
-                                Clear all filters
-                            </button>
-                        </motion.div>
+                        </div>
                     )}
                 </div>
             </div>
 
-            {/* Floating Toast Notification */}
+            {/* Products Grid */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+                <div className={`grid gap-6 ${
+                    viewMode === "grid"
+                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                        : "grid-cols-1"
+                }`}>
+                    {sortedProducts.map((product, index) => (
+                        <motion.div
+                            key={product.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.05, duration: 0.3 }}
+                            className="group"
+                        >
+                            <div className={`bg-white rounded-2xl border-2 border-green-100 overflow-hidden hover:border-green-400 hover:shadow-xl hover:shadow-green-100 transition-all duration-300 ${viewMode === "list" ? "flex" : ""}`}>
+                                {/* Product Image */}
+                                <div className={`relative overflow-hidden bg-gradient-to-br from-green-50 to-white ${viewMode === "list" ? "w-48 flex-shrink-0" : "aspect-square"}`}>
+                                    <img
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        src={product.image}
+                                        alt={product.name}
+                                        onError={handleImageError}
+                                        loading="lazy"
+                                    />
+                                    
+                                    {/* Tags */}
+                                    <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                                        <span className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full shadow-lg ${
+                                            product.tag === "Best Selling" ? "bg-green-600 text-white" :
+                                            product.tag === "Popular" ? "bg-green-500 text-white" :
+                                            product.tag === "Trending" ? "bg-green-400 text-white" :
+                                            product.tag === "Deals" ? "bg-red-500 text-white" :
+                                            "bg-green-700 text-white"
+                                        }`}>
+                                            {product.tag}
+                                        </span>
+                                        <span className="inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/90 text-green-700 border border-green-200">
+                                            {product.category}
+                                        </span>
+                                    </div>
+
+                                    {/* Hover Actions */}
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+                                        <button
+                                            onClick={() => handleQuickView(product)}
+                                            className="p-2 bg-white rounded-full text-green-700 hover:bg-green-600 hover:text-white transition-all"
+                                        >
+                                            <Eye className="w-5 h-5" />
+                                        </button>
+                                        <button
+                                            onClick={() => handleToggleWishlist(product)}
+                                            className={`p-2 rounded-full transition-all ${
+                                                isInWishlist(product.id)
+                                                    ? "bg-red-500 text-white"
+                                                    : "bg-white text-green-700 hover:bg-red-500 hover:text-white"
+                                            }`}
+                                        >
+                                            <Heart className={`w-5 h-5 ${isInWishlist(product.id) ? "fill-current" : ""}`} />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Product Info */}
+                                <div className={`p-5 ${viewMode === "list" ? "flex-1 flex flex-col justify-between" : ""}`}>
+                                    <div>
+                                        {product.rating && (
+                                            <div className="flex items-center gap-2 mb-2">
+                                                {renderStars(product.rating)}
+                                                <span className="text-sm font-semibold text-green-700">{product.rating}</span>
+                                                {product.reviews && (
+                                                    <span className="text-xs text-green-500">({product.reviews})</span>
+                                                )}
+                                            </div>
+                                        )}
+                                        <h3 className="text-sm font-semibold text-green-900 group-hover:text-green-600 transition-colors mb-1 line-clamp-2">
+                                            {product.name}
+                                        </h3>
+                                        <p className="text-xs text-green-600 mb-3">{product.brand}</p>
+                                    </div>
+
+                                    <div>
+                                        <span className="text-lg font-bold text-green-900 block mb-3">{product.price}</span>
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() => handleAddToCart(product)}
+                                                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-green-600 text-white rounded-xl text-sm font-semibold hover:bg-green-700 transition-all shadow-md hover:shadow-lg"
+                                            >
+                                                <ShoppingCart className="w-4 h-4" />
+                                                Add to Cart
+                                            </button>
+                                            <button className="px-4 py-2.5 bg-white border-2 border-green-600 text-green-600 rounded-xl text-sm font-semibold hover:bg-green-50 transition-all">
+                                                Buy Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Empty State */}
+                {filteredProducts.length === 0 && (
+                    <div className="text-center py-20">
+                        <Package className="w-20 h-20 text-green-300 mx-auto mb-4" />
+                        <h3 className="text-xl font-semibold text-green-800 mb-2">No Products Found</h3>
+                        <p className="text-green-600 mb-4">Try adjusting your filters or search query</p>
+                        <button
+                            onClick={clearAllFilters}
+                            className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all"
+                        >
+                            Clear All Filters
+                        </button>
+                    </div>
+                )}
+            </div>
+
+            {/* Toast Notification */}
             <AnimatePresence>
                 {toastMessage && (
                     <motion.div
-                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 bg-emerald-950 text-white rounded-2xl shadow-2xl border border-emerald-800/30"
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 50 }}
+                        className="fixed bottom-6 right-6 z-50 bg-green-800 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-2"
                     >
-                        <div className={`p-1.5 rounded-full ${toastType === 'cart' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`}>
-                            {toastType === 'cart' ? <ShoppingCart className="w-5 h-5" /> : <Heart className="w-5 h-5 fill-current" />}
-                        </div>
-                        <div>
-                            <p className="text-sm font-semibold tracking-tight">{toastMessage}</p>
-                        </div>
+                        <ShoppingCart className="w-5 h-5" />
+                        <span className="font-medium">{toastMessage}</span>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Animation keyframes */}
+            {/* Styles for scrollbar hide */}
             <style>{`
-        @keyframes slideDown {
-          from { transform: translateY(-100%); }
-          to { transform: translateY(0); }
-        }
-        .animate-slideDown {
-          animation: slideDown 0.3s ease-out;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}</style>
         </section>
     );
 };

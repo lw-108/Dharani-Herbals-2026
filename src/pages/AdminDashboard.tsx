@@ -42,3 +42,4 @@ export const AdminDashboard = () => {
     </RequireAdmin>
   );
 };
+export default AdminDashboard;

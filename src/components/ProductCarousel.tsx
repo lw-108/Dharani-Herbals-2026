@@ -8,7 +8,7 @@ export const ProductCarousel = () => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    
+
     if (bannerRef.current) {
       gsap.from(bannerRef.current, {
         y: -100,
@@ -46,12 +46,13 @@ export const ProductCarousel = () => {
       </div>
 
       {/* Content Container - Above banner with z-index */}
-      <div className="relative z-10 container mx-auto px-4 mt-16">
+      {/* <div className="relative z-10 container mx-auto px-4 mt-16">
         <h2 className="text-3xl font-bold text-center text-white mb-8">
           Our Products
         </h2>
-        <Skiper47 />
-      </div>
+      </div> */}
+      <Skiper47 />
+
     </section>
   );
 };

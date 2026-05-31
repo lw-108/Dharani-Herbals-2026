@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "@/context/AdminAuthContext";
 import { Button } from "@/components/ui/button";
 
-export default AdminLogin;
+const AdminLogin: React.FC = () => {
   const { login } = useAdminAuth();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -64,3 +64,5 @@ export default AdminLogin;
     </section>
   );
 };
+
+export default AdminLogin;

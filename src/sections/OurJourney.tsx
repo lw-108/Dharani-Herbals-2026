@@ -20,21 +20,21 @@ const stats = [
     value: "15+", 
     label: "Legacy of Trust",
     suffix: "Years",
-    gradient: "from-rose-500 to-pink-500",
+    gradient: "from-green-600 to-green-500",
   },
   { 
     icon: <Users className="w-6 h-6" />,
     value: "6L+", 
     label: "Customers Served",
     suffix: "Happy Souls",
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-green-500 to-emerald-500",
   },
   { 
     icon: <Package className="w-6 h-6" />,
     value: "350+", 
     label: "Products Crafted",
     suffix: "& Growing",
-    gradient: "from-emerald-500 to-green-500",
+    gradient: "from-emerald-600 to-green-500",
   },
   { 
     icon: <Leaf className="w-6 h-6" />,
@@ -50,25 +50,28 @@ const values = [
     icon: <Leaf className="w-6 h-6" />,
     title: "100% Natural Ingredients",
     description: "We source only the finest natural herbs and ingredients, ensuring purity and potency in every product.",
-    gradient: "from-green-500/20 to-emerald-500/20",
-    iconBg: "bg-green-500/10",
-    iconColor: "text-green-400",
+    gradient: "from-green-50 to-emerald-50",
+    iconBg: "bg-green-100",
+    iconColor: "text-green-600",
+    borderHover: "hover:border-green-300",
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
     title: "Quality Assurance",
     description: "Every product undergoes rigorous testing and quality checks to meet the highest safety standards.",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-400",
+    gradient: "from-green-50 to-green-100",
+    iconBg: "bg-green-100",
+    iconColor: "text-green-600",
+    borderHover: "hover:border-green-300",
   },
   {
     icon: <BookOpen className="w-6 h-6" />,
     title: "Traditional Wisdom",
     description: "Our formulations are based on ancient Ayurvedic principles, refined through generations of knowledge.",
-    gradient: "from-amber-500/20 to-orange-500/20",
-    iconBg: "bg-amber-500/10",
-    iconColor: "text-amber-400",
+    gradient: "from-green-50 to-emerald-50",
+    iconBg: "bg-green-100",
+    iconColor: "text-green-600",
+    borderHover: "hover:border-green-300",
   },
 ];
 
@@ -97,18 +100,18 @@ const features = [
 
 const OurJourney = () => {
   return (
-    <section className="relative bg-[#0a0f09] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-white py-20 md:py-28 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-green-500/3 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-b from-emerald-500/2 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-50 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-green-100/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-b from-green-50 to-transparent rounded-full blur-3xl" />
         
         {/* Subtle pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.015]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `radial-gradient(circle at 20px 20px, rgba(255,255,255,0.2) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle at 20px 20px, rgba(34,197,94,0.1) 1px, transparent 1px)`,
             backgroundSize: "40px 40px",
           }}
         />
@@ -129,7 +132,7 @@ const OurJourney = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.4 }}
-              className="inline-block text-sm font-semibold tracking-widest uppercase mb-6 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+              className="inline-block text-sm font-semibold tracking-widest uppercase mb-6 px-4 py-2 rounded-full bg-green-100 text-green-700 border border-green-200"
             >
               Our Journey
             </motion.span>
@@ -139,14 +142,14 @@ const OurJourney = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-900 mb-8 leading-tight"
             >
               It didn't start with a product.{" "}
               <span className="relative">
-                <span className="relative z-10 bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                <span className="relative z-10 bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
                   It started with a question.
                 </span>
-                <div className="absolute bottom-1 left-0 right-0 h-2 bg-emerald-500/10 rounded-full" />
+                <div className="absolute bottom-1 left-0 right-0 h-2 bg-green-200 rounded-full" />
               </span>
             </motion.h2>
 
@@ -155,7 +158,7 @@ const OurJourney = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="text-xl text-emerald-400 font-medium mb-6 italic"
+              className="text-xl text-green-600 font-medium mb-6 italic"
             >
               What if healing could be simple again?
             </motion.p>
@@ -165,11 +168,11 @@ const OurJourney = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="space-y-5 text-gray-300 leading-relaxed"
+              className="space-y-5 text-green-800 leading-relaxed"
             >
               <p>
-                Our journey began in <span className="text-white font-semibold">2004</span> with dedicated research into 
-                <span className="text-emerald-400 font-medium"> Siddha and Ayurveda</span>, exploring the depth of natural healing and time-tested traditions.
+                Our journey began in <span className="text-green-900 font-semibold">2004</span> with dedicated research into 
+                <span className="text-green-600 font-medium"> Siddha and Ayurveda</span>, exploring the depth of natural healing and time-tested traditions.
               </p>
               <p>
                 In a world overwhelmed by artificial solutions and quick fixes, we chose a different path — one that returns to purity, to tradition, and to the quiet power of nature.
@@ -185,11 +188,11 @@ const OurJourney = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.5 }}
-              className="mt-8 p-5 rounded-2xl bg-gradient-to-r from-emerald-500/5 to-green-500/5 border border-emerald-500/10"
+              className="mt-8 p-5 rounded-2xl bg-green-50 border border-green-200"
             >
-              <p className="text-lg font-semibold text-white">
-                <span className="text-emerald-400">Back to roots.</span>{" "}
-                <span className="text-gray-300">Forward to better living.</span>
+              <p className="text-lg font-semibold text-green-900">
+                <span className="text-green-600">Back to roots.</span>{" "}
+                <span className="text-green-700">Forward to better living.</span>
               </p>
             </motion.div>
 
@@ -204,7 +207,7 @@ const OurJourney = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-500/25"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition-all duration-300 shadow-lg shadow-green-200"
               >
                 Explore Our Products
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -213,10 +216,10 @@ const OurJourney = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:border-emerald-500/30 text-white font-semibold transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white border-2 border-green-200 hover:border-green-400 text-green-700 font-semibold transition-all duration-300"
               >
                 Get In Touch
-                <ArrowRight className="w-5 h-5 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 text-green-600 group-hover:translate-x-1 transition-transform" />
               </motion.button>
             </motion.div>
           </motion.div>
@@ -232,10 +235,10 @@ const OurJourney = () => {
             {/* Decorative frame */}
             <div className="relative">
               {/* Background glow */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-emerald-500/10 to-green-500/5 rounded-3xl blur-xl" />
+              <div className="absolute -inset-4 bg-gradient-to-br from-green-100 to-green-50 rounded-3xl blur-xl" />
               
               {/* Image Container */}
-              <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-emerald-500/10 group">
+              <div className="relative rounded-3xl overflow-hidden border-2 border-green-200 shadow-2xl shadow-green-100 group">
                 <img
                   src="/GroupPhoto.png"
                   alt="Dharani Herbals Team"
@@ -244,27 +247,7 @@ const OurJourney = () => {
                     e.currentTarget.src = "/Placeholder.png";
                   }}
                 />
-                
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Brand badge on image */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 border border-white/10">
-                    <h3 className="text-xl font-bold text-white">
-                      Dharani{" "}
-                      <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
-                        Herbals
-                      </span>
-                    </h3>
-                    <p className="text-xs text-emerald-400/80 mt-0.5 tracking-wider uppercase">About Us</p>
-                  </div>
-                </div>
               </div>
-
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-green-500/10 rounded-full blur-xl" />
             </div>
 
             {/* Stats Grid - Below Image */}
@@ -277,31 +260,31 @@ const OurJourney = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
                   whileHover={{ y: -3 }}
-                  className="group relative p-4 rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/5 hover:border-emerald-500/20 transition-all duration-300 overflow-hidden"
+                  className="group relative p-4 rounded-2xl bg-white border-2 border-green-100 hover:border-green-300 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md"
                 >
                   {/* Gradient overlay on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                   
                   <div className="relative">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                      <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center text-green-600">
                         {stat.icon}
                       </div>
                     </div>
-                    <div className="text-2xl md:text-3xl font-bold text-white mb-0.5">
+                    <div className="text-2xl md:text-3xl font-bold text-green-900 mb-0.5">
                       {stat.value}
                     </div>
-                    <p className="text-xs font-medium text-gray-400 group-hover:text-gray-300 transition-colors">
+                    <p className="text-xs font-medium text-green-700 group-hover:text-green-800 transition-colors">
                       {stat.label}
                     </p>
-                    <p className="text-[10px] text-emerald-500/60 mt-0.5">
+                    <p className="text-[10px] text-green-500 mt-0.5">
                       {stat.suffix}
                     </p>
                   </div>
 
                   {/* Shine effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/3 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-green-100/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </div>
                 </motion.div>
               ))}
@@ -326,7 +309,7 @@ const OurJourney = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -5 }}
-                className="group relative p-8 rounded-3xl bg-white/[0.02] backdrop-blur-sm border border-white/5 hover:border-emerald-500/20 transition-all duration-500 overflow-hidden"
+                className={`group relative p-8 rounded-3xl bg-white border-2 border-green-100 ${value.borderHover} transition-all duration-500 overflow-hidden shadow-sm hover:shadow-lg`}
               >
                 {/* Gradient overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -336,18 +319,18 @@ const OurJourney = () => {
                     {value.icon}
                   </div>
                   
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-white transition-colors">
+                  <h3 className="text-xl font-bold text-green-900 mb-3 group-hover:text-green-800 transition-colors">
                     {value.title}
                   </h3>
                   
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors leading-relaxed">
+                  <p className="text-green-700 group-hover:text-green-800 transition-colors leading-relaxed">
                     {value.description}
                   </p>
                 </div>
 
                 {/* Shine effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/3 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-green-100/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </div>
               </motion.div>
             ))}
@@ -370,13 +353,13 @@ const OurJourney = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
               whileHover={{ y: -3 }}
-              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-emerald-500/20 transition-all duration-300"
+              className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white border-2 border-green-100 hover:border-green-300 transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-3 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
+              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center text-green-600 mb-3 group-hover:scale-110 group-hover:bg-green-200 transition-all duration-300">
                 {feature.icon}
               </div>
-              <h4 className="text-sm font-semibold text-white mb-1">{feature.title}</h4>
-              <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">{feature.description}</p>
+              <h4 className="text-sm font-semibold text-green-900 mb-1">{feature.title}</h4>
+              <p className="text-xs text-green-600 group-hover:text-green-700 transition-colors">{feature.description}</p>
             </motion.div>
           ))}
         </motion.div>

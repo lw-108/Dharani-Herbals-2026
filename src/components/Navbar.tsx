@@ -3,6 +3,7 @@ import {
   Heart,
   ShoppingCart,
   LogOut,
+  User,
 } from "lucide-react";
 
 import { useNavigate, Link } from "react-router-dom";
@@ -162,9 +163,7 @@ export const Navbar = () => {
         scrollbar-hide
         border-b
         border-[#0d5c3f]/10
-        bg-white/85
-        backdrop-blur-2xl
-        supports-[backdrop-filter]:bg-white/70
+        bg-white
       "
     >
       <nav
@@ -379,7 +378,7 @@ export const Navbar = () => {
                     transition-all
                     duration-300
                     hover:border-[#0d5c3f]/30
-                    hover:bg-[#0d5c3f]/5
+                    hover:bg-[#0d5c3f]
                   "
                 >
                   <Avatar
@@ -528,62 +527,26 @@ export const Navbar = () => {
               </DialogContent>
             </Dialog>
           ) : (
-            <div
-              className="
-                hidden
-                items-center
-                gap-2
-                sm:flex
-              "
-            >
-              {/* SIGN IN */}
-              <Link to="/signin">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="
-                    h-9
-                    rounded-full
-                    border-zinc-200
-                    bg-white/90
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-zinc-700
-                    shadow-sm
-                    transition-all
-                    duration-300
-                    hover:border-[#0d5c3f]/30
-                    hover:bg-[#0d5c3f]/5
-                    hover:text-[#0d5c3f]
-                  "
-                >
-                  Sign In
-                </Button>
-              </Link>
-
-              {/* SIGN UP */}
-              <Link to="/signup">
-                <Button
-                  size="sm"
-                  className="
-                    h-9
-                    rounded-full
-                    bg-[#0d5c3f]
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-white
-                    shadow-md
-                    transition-all
-                    duration-300
-                    hover:bg-[#0b4f36]
-                  "
-                >
-                  Sign Up
-                </Button>
-              </Link>
-            </div>
+            <Link to="/signin" className="relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="
+                  relative
+                  h-10
+                  w-10
+                  rounded-full
+                  text-zinc-700
+                  transition-all
+                  duration-300
+                  hover:scale-105
+                  hover:bg-[#0d5c3f]/8
+                  hover:text-[#0d5c3f]
+                "
+              >
+                <User className="h-[18px] w-[18px]" />
+              </Button>
+            </Link>
           )}
 
           {/* MOBILE MENU */}
@@ -597,4 +560,3 @@ export const Navbar = () => {
 };
 
 export default Navbar;
-

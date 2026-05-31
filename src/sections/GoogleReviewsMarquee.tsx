@@ -12,7 +12,7 @@ const reviews = [
     date: "2 weeks ago",
     rating: 5,
     text: "Excellent herbal products! Very effective and natural. Highly recommended.",
-    color: "from-rose-500 to-pink-500",
+    color: "from-green-600 to-green-500",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const reviews = [
     date: "1 month ago",
     rating: 5,
     text: "Great quality products. Fast delivery and good customer service.",
-    color: "from-blue-500 to-cyan-500",
+    color: "from-green-500 to-emerald-500",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const reviews = [
     date: "3 weeks ago",
     rating: 4,
     text: "Good herbal medicines. Helped with my health issues. Will order again.",
-    color: "from-purple-500 to-violet-500",
+    color: "from-emerald-600 to-green-500",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const reviews = [
     date: "2 months ago",
     rating: 5,
     text: "Authentic Ayurvedic products. Very satisfied with the results.",
-    color: "from-emerald-500 to-green-500",
+    color: "from-green-700 to-green-600",
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ const reviews = [
     date: "1 week ago",
     rating: 5,
     text: "Pure and natural products. Excellent for wellness. Thank you!",
-    color: "from-amber-500 to-orange-500",
+    color: "from-green-500 to-green-400",
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ const reviews = [
     date: "1 month ago",
     rating: 5,
     text: "Amazing results with their herbal supplements. Will definitely buy again.",
-    color: "from-teal-500 to-cyan-500",
+    color: "from-green-600 to-emerald-500",
   },
   {
     id: 7,
@@ -66,7 +66,7 @@ const reviews = [
     date: "3 weeks ago",
     rating: 4,
     text: "Good quality herbal products. Packaging was excellent and delivery was quick.",
-    color: "from-indigo-500 to-blue-500",
+    color: "from-emerald-500 to-green-500",
   },
   {
     id: 8,
@@ -75,7 +75,7 @@ const reviews = [
     date: "2 weeks ago",
     rating: 5,
     text: "Traditional Ayurvedic medicines that actually work. Highly satisfied!",
-    color: "from-fuchsia-500 to-pink-500",
+    color: "from-green-700 to-green-500",
   },
   {
     id: 9,
@@ -84,7 +84,7 @@ const reviews = [
     date: "1 week ago",
     rating: 5,
     text: "Best herbal store online. Genuine products and reasonable prices.",
-    color: "from-orange-500 to-red-500",
+    color: "from-green-500 to-green-600",
   },
   {
     id: 10,
@@ -93,7 +93,7 @@ const reviews = [
     date: "4 weeks ago",
     rating: 4,
     text: "Natural and effective products. Customer service is also very helpful.",
-    color: "from-green-500 to-emerald-500",
+    color: "from-green-600 to-green-700",
   },
 ];
 
@@ -171,34 +171,44 @@ const GoogleReviewsMarquee = () => {
         key={index}
         className={`w-4 h-4 ${
           index < rating
-            ? "text-yellow-400 fill-yellow-400"
-            : "text-gray-600 fill-gray-600"
+            ? "text-green-600 fill-green-600"
+            : "text-green-200 fill-green-200"
         }`}
       />
     ));
   };
 
   return (
-    <section className="relative bg-[#12210f] py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-white py-16 md:py-24 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-green-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-emerald-500/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-green-50 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-green-100/50 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-green-50 to-transparent rounded-full blur-3xl" />
       </div>
 
-      <div className="relative">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 px-4"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="inline-block text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-2 rounded-full bg-green-100 text-green-700 border border-green-200"
+          >
+            Testimonials
+          </motion.span>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-green-900 mb-6">
             Customer Favorites{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
               & Experiences
             </span>
           </h2>
@@ -209,18 +219,18 @@ const GoogleReviewsMarquee = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-green-50 border border-green-200"
           >
             <GoogleIcon className="w-8 h-8" />
             <div className="flex items-center gap-2">
               <div className="flex items-center">
                 {renderStars(5)}
               </div>
-              <span className="text-2xl font-bold text-white">4.8</span>
+              <span className="text-2xl font-bold text-green-900">4.8</span>
             </div>
-            <div className="w-px h-8 bg-white/20" />
-            <span className="text-sm text-gray-400">
-              Based on <span className="text-white font-semibold">150+</span> Google reviews
+            <div className="w-px h-8 bg-green-200" />
+            <span className="text-sm text-green-700">
+              Based on <span className="text-green-900 font-semibold">150+</span> Google reviews
             </span>
           </motion.div>
 
@@ -235,7 +245,7 @@ const GoogleReviewsMarquee = () => {
             transition={{ delay: 0.5, duration: 0.4 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-emerald-500/30 text-white font-medium transition-all duration-300"
+            className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-green-600 text-white hover:bg-green-700 font-medium transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <GoogleIcon className="w-5 h-5" />
             Write a Review
@@ -249,14 +259,14 @@ const GoogleReviewsMarquee = () => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Gradient Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#12210f] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#12210f] to-transparent z-10 pointer-events-none" />
+          {/* Gradient Fade Edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           {/* Scroll Container */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-4 px-8 py-4 overflow-hidden"
+            className="flex gap-6 py-4 overflow-hidden"
             style={{ scrollBehavior: "auto" }}
           >
             {duplicatedReviews.map((review, index) => (
@@ -266,24 +276,24 @@ const GoogleReviewsMarquee = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: Math.min(index * 0.05, 1), duration: 0.5 }}
-                className="flex-shrink-0 w-[350px]"
+                className="flex-shrink-0 w-[380px]"
               >
-                <div className="h-full p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-emerald-500/20 transition-all duration-300 hover:bg-white/[0.07] group">
+                <div className="h-full p-6 rounded-2xl bg-white border-2 border-green-100 hover:border-green-400 transition-all duration-300 hover:shadow-lg hover:shadow-green-50 group">
                   {/* Review Header */}
                   <div className="flex items-start gap-3 mb-4">
                     {/* Avatar */}
-                    <div className={`flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br ${review.color} flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br ${review.color} flex items-center justify-center text-white font-bold text-base shadow-md`}>
                       {review.initial}
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-white font-semibold text-sm truncate">
+                      <h4 className="text-green-900 font-semibold text-sm truncate">
                         {review.name}
                       </h4>
-                      <p className="text-xs text-gray-500">{review.date}</p>
+                      <p className="text-xs text-green-600">{review.date}</p>
                     </div>
 
-                    <GoogleIcon className="w-4 h-4 flex-shrink-0 opacity-50" />
+                    <GoogleIcon className="w-5 h-5 flex-shrink-0" />
                   </div>
 
                   {/* Stars */}
@@ -292,23 +302,23 @@ const GoogleReviewsMarquee = () => {
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
+                  <p className="text-green-800 text-sm leading-relaxed line-clamp-3">
                     "{review.text}"
                   </p>
 
                   {/* Like Button */}
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/5">
-                    <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-emerald-400 transition-colors">
+                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-green-100">
+                    <button className="flex items-center gap-1.5 text-xs text-green-600 hover:text-green-700 transition-colors">
                       <ThumbsUp className="w-3.5 h-3.5" />
                       Helpful
                     </button>
-                    <span className="text-xs text-gray-600">•</span>
-                    <span className="text-xs text-gray-600">Google Review</span>
+                    <span className="text-xs text-green-300">•</span>
+                    <span className="text-xs text-green-500">Google Review</span>
                   </div>
 
                   {/* Shine Effect */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/3 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-green-100/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </div>
                 </div>
               </motion.div>
@@ -330,13 +340,13 @@ const GoogleReviewsMarquee = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-green-600 text-white hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden"
           >
-            <span className="relative z-10 text-emerald-400 font-medium group-hover:text-white transition-colors">
+            <span className="relative z-10 font-medium">
               View All Reviews
             </span>
-            <ExternalLink className="relative z-10 w-5 h-5 text-emerald-400 group-hover:translate-x-1 transition-transform" />
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/20 to-emerald-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <ExternalLink className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-400/20 to-green-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
           </motion.a>
         </motion.div>
       </div>

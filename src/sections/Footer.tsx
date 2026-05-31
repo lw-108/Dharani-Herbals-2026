@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Phone, 
@@ -86,11 +86,14 @@ const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Handle scroll to top visibility
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
+  useEffect(() => {
+    const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
-    });
-  }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -101,11 +104,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#060a05] border-t border-white/5">
+    <footer className="relative bg-white border-t-2 border-green-100">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-500/3 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-50 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-green-100/30 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto">
@@ -122,15 +125,15 @@ const Footer = () => {
                   viewport={{ once: true }}
                   className="flex items-center gap-3 mb-3"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-600 to-green-500 flex items-center justify-center shadow-lg shadow-green-200">
                     <Leaf className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">Dharani</h3>
-                    <p className="text-xs text-emerald-400 tracking-wider">Herbals</p>
+                    <h3 className="text-xl font-bold text-green-900">Dharani</h3>
+                    <p className="text-xs text-green-600 tracking-wider">Herbals</p>
                   </div>
                 </motion.div>
-                <p className="text-sm text-gray-400 leading-relaxed">
+                <p className="text-sm text-green-700 leading-relaxed">
                   Natural herbal products rooted in Ayurvedic wisdom for your complete wellness journey.
                 </p>
               </div>
@@ -145,37 +148,37 @@ const Footer = () => {
               >
                 <a 
                   href="tel:+919788122001" 
-                  className="flex items-center gap-3 text-gray-400 hover:text-emerald-400 transition-colors group"
+                  className="flex items-center gap-3 text-green-700 hover:text-green-600 transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
-                    <Phone className="w-4 h-4 text-emerald-400" />
+                  <div className="w-9 h-9 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
+                    <Phone className="w-4 h-4 text-green-600" />
                   </div>
                   <span className="text-sm">+91 97881 22001</span>
                 </a>
 
                 <a 
                   href="mailto:info@dharaniherbbals.in" 
-                  className="flex items-center gap-3 text-gray-400 hover:text-emerald-400 transition-colors group"
+                  className="flex items-center gap-3 text-green-700 hover:text-green-600 transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
-                    <Mail className="w-4 h-4 text-emerald-400" />
+                  <div className="w-9 h-9 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
+                    <Mail className="w-4 h-4 text-green-600" />
                   </div>
                   <span className="text-sm">info@dharaniherbbals.in</span>
                 </a>
 
                 <a 
                   href="mailto:salesdharani@gmail.com" 
-                  className="flex items-center gap-3 text-gray-400 hover:text-emerald-400 transition-colors group"
+                  className="flex items-center gap-3 text-green-700 hover:text-green-600 transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/20 transition-colors">
-                    <Mail className="w-4 h-4 text-emerald-400" />
+                  <div className="w-9 h-9 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
+                    <Mail className="w-4 h-4 text-green-600" />
                   </div>
                   <span className="text-sm">salesdharani@gmail.com</span>
                 </a>
 
-                <div className="flex items-start gap-3 text-gray-400">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <MapPin className="w-4 h-4 text-emerald-400" />
+                <div className="flex items-start gap-3 text-green-700">
+                  <div className="w-9 h-9 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <MapPin className="w-4 h-4 text-green-600" />
                   </div>
                   <span className="text-sm leading-relaxed">
                     7/470-1, Chemparuthi Street,<br />
@@ -186,9 +189,9 @@ const Footer = () => {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-3 text-gray-400">
-                  <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-4 h-4 text-emerald-400" />
+                <div className="flex items-center gap-3 text-green-700">
+                  <div className="w-9 h-9 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 text-green-600" />
                   </div>
                   <span className="text-sm">Mon - Sat: 9:00 AM - 7:00 PM</span>
                 </div>
@@ -202,17 +205,17 @@ const Footer = () => {
                 transition={{ delay: 0.2 }}
                 className="mb-8"
               >
-                <h4 className="text-sm font-semibold text-white mb-3">Available on</h4>
+                <h4 className="text-sm font-semibold text-green-900 mb-3">Available on</h4>
                 <a
                   href="#"
-                  className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-white/[0.07] transition-all duration-300 group"
+                  className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-green-50 border-2 border-green-200 hover:border-green-400 hover:bg-green-100 transition-all duration-300 group"
                 >
-                  <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-6 h-6 text-green-600" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
                   </svg>
                   <div>
-                    <p className="text-xs text-gray-400">Get it on</p>
-                    <p className="text-sm font-semibold text-white">Google Play</p>
+                    <p className="text-xs text-green-600">Get it on</p>
+                    <p className="text-sm font-semibold text-green-900">Google Play</p>
                   </div>
                 </a>
               </motion.div>
@@ -227,7 +230,7 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
               >
-                <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <h4 className="text-sm font-semibold text-green-900 mb-4 flex items-center gap-2">
                   {footerLinks.shop.icon}
                   {footerLinks.shop.title}
                 </h4>
@@ -236,7 +239,7 @@ const Footer = () => {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="flex items-center gap-2 text-sm text-gray-400 hover:text-emerald-400 transition-colors group"
+                        className="flex items-center gap-2 text-sm text-green-700 hover:text-green-600 transition-colors group"
                       >
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity">
                           {link.icon}
@@ -245,8 +248,8 @@ const Footer = () => {
                         {link.badge && (
                           <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
                             link.badge === "Hot" 
-                              ? "bg-red-500/20 text-red-400" 
-                              : "bg-green-500/20 text-green-400"
+                              ? "bg-red-100 text-red-600" 
+                              : "bg-green-100 text-green-600"
                           }`}>
                             {link.badge}
                           </span>
@@ -264,14 +267,14 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 }}
               >
-                <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <h4 className="text-sm font-semibold text-green-900 mb-4 flex items-center gap-2">
                   {footerLinks.company.icon}
                   {footerLinks.company.title}
                 </h4>
                 <ul className="space-y-3">
                   {footerLinks.company.links.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">
+                      <a href={link.href} className="text-sm text-green-700 hover:text-green-600 transition-colors">
                         {link.label}
                       </a>
                     </li>
@@ -279,14 +282,14 @@ const Footer = () => {
                 </ul>
 
                 {/* Policies under About Us */}
-                <h4 className="text-sm font-semibold text-white mt-6 mb-4 flex items-center gap-2">
+                <h4 className="text-sm font-semibold text-green-900 mt-6 mb-4 flex items-center gap-2">
                   {footerLinks.policies.icon}
                   {footerLinks.policies.title}
                 </h4>
                 <ul className="space-y-3">
                   {footerLinks.policies.links.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">
+                      <a href={link.href} className="text-sm text-green-700 hover:text-green-600 transition-colors">
                         {link.label}
                       </a>
                     </li>
@@ -302,7 +305,7 @@ const Footer = () => {
                 transition={{ delay: 0.2 }}
                 className="col-span-2"
               >
-                <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <h4 className="text-sm font-semibold text-green-900 mb-4 flex items-center gap-2">
                   {footerLinks.brands.icon}
                   {footerLinks.brands.title}
                 </h4>
@@ -311,7 +314,7 @@ const Footer = () => {
                     <a
                       key={link.label}
                       href={link.href}
-                      className="text-sm text-gray-400 hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-emerald-500/20 hover:bg-white/[0.04] transition-all duration-300"
+                      className="text-sm text-green-700 hover:text-green-600 transition-colors px-3 py-2 rounded-lg bg-green-50 border border-green-100 hover:border-green-300 hover:bg-green-100 transition-all duration-300"
                     >
                       {link.label}
                     </a>
@@ -326,14 +329,14 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.25 }}
               >
-                <h4 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <h4 className="text-sm font-semibold text-green-900 mb-4 flex items-center gap-2">
                   {footerLinks.support.icon}
                   {footerLinks.support.title}
                 </h4>
                 <ul className="space-y-3">
                   {footerLinks.support.links.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="text-sm text-gray-400 hover:text-emerald-400 transition-colors">
+                      <a href={link.href} className="text-sm text-green-700 hover:text-green-600 transition-colors">
                         {link.label}
                       </a>
                     </li>
@@ -350,11 +353,11 @@ const Footer = () => {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="border border-white/5 rounded-xl overflow-hidden"
+                  className="border-2 border-green-100 rounded-xl overflow-hidden"
                 >
                   <button
                     onClick={() => toggleSection(key)}
-                    className="w-full flex items-center justify-between p-4 text-sm font-semibold text-white hover:bg-white/[0.02] transition-colors"
+                    className="w-full flex items-center justify-between p-4 text-sm font-semibold text-green-900 hover:bg-green-50 transition-colors"
                   >
                     <span className="flex items-center gap-2">
                       {section.icon}
@@ -364,7 +367,7 @@ const Footer = () => {
                       animate={{ rotate: expandedSection === key ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <ChevronDown className="w-4 h-4 text-gray-400" />
+                      <ChevronDown className="w-4 h-4 text-green-600" />
                     </motion.div>
                   </button>
                   <motion.div
@@ -383,7 +386,7 @@ const Footer = () => {
                             <a
                               key={link.label}
                               href={link.href}
-                              className="text-sm text-gray-400 hover:text-emerald-400 transition-colors px-3 py-2 rounded-lg bg-white/[0.02] border border-white/5"
+                              className="text-sm text-green-700 hover:text-green-600 transition-colors px-3 py-2 rounded-lg bg-green-50 border border-green-100"
                             >
                               {link.label}
                             </a>
@@ -394,14 +397,14 @@ const Footer = () => {
                           <a
                             key={link.label}
                             href={link.href}
-                            className="flex items-center gap-2 text-sm text-gray-400 hover:text-emerald-400 transition-colors py-1"
+                            className="flex items-center gap-2 text-sm text-green-700 hover:text-green-600 transition-colors py-1"
                           >
                             {link.label}
                             {link.badge && (
                               <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
                                 link.badge === "Hot" 
-                                  ? "bg-red-500/20 text-red-400" 
-                                  : "bg-green-500/20 text-green-400"
+                                  ? "bg-red-100 text-red-600" 
+                                  : "bg-green-100 text-green-600"
                               }`}>
                                 {link.badge}
                               </span>
@@ -418,7 +421,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/5">
+        <div className="border-t-2 border-green-100">
           <div className="px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               {/* Copyright */}
@@ -426,7 +429,7 @@ const Footer = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-sm text-gray-500 text-center md:text-left"
+                className="text-sm text-green-600 text-center md:text-left"
               >
                 © 2026 Dharani Herbals. All rights reserved.
               </motion.p>
@@ -437,10 +440,10 @@ const Footer = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-sm text-gray-500 text-center"
+                className="text-sm text-green-600 text-center"
               >
                 Dharani Herbals managed by{" "}
-                <span className="text-gray-400 font-medium">ARUMUGAM POONKODI</span>
+                <span className="text-green-800 font-medium">ARUMUGAM POONKODI</span>
               </motion.p>
 
               {/* Developed by */}
@@ -450,10 +453,10 @@ const Footer = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
                 href="#"
-                className="flex items-center gap-2 text-sm text-gray-500 hover:text-emerald-400 transition-colors"
+                className="flex items-center gap-2 text-sm text-green-600 hover:text-green-700 transition-colors"
               >
                 Developed by{" "}
-                <span className="text-gray-400 font-medium">ThinkAside</span>
+                <span className="text-green-800 font-medium">ThinkAside</span>
                 <ExternalLink className="w-3 h-3" />
               </motion.a>
             </div>
@@ -469,7 +472,7 @@ const Footer = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/25 flex items-center justify-center transition-colors z-50"
+            className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-200 flex items-center justify-center transition-colors z-50"
           >
             <ArrowUp className="w-5 h-5" />
           </motion.button>

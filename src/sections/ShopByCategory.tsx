@@ -59,8 +59,8 @@ const ShopByCategory = () => {
 
   if (loading) {
     return (
-      <section className="relative bg-[#12210f] py-20 md:py-28 overflow-hidden">
-        <div className="flex justify-center items-center h-64 text-white text-xl">
+      <section className="relative bg-white py-20 md:py-28 overflow-hidden">
+        <div className="flex justify-center items-center h-64 text-green-700 text-xl">
           Loading categories...
         </div>
       </section>
@@ -69,7 +69,7 @@ const ShopByCategory = () => {
 
   if (error) {
     return (
-      <section className="relative bg-[#12210f] py-20 md:py-28 overflow-hidden">
+      <section className="relative bg-white py-20 md:py-28 overflow-hidden">
         <div className="flex flex-col justify-center items-center h-64 text-red-400 text-xl">
           <p>Error loading categories:</p>
           <pre className="mt-2">{error}</pre>
@@ -303,4 +303,4 @@ const ShopByCategory = () => {
   );
 };
 
-export default ShopByCategory;
+export default ShopByCategory;
