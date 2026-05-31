@@ -98,7 +98,7 @@ export const SignUpPage: React.FC = () => {
   };
 
   return (
-    <section className="min-h-[85vh] bg-[#0a0f09] flex items-center justify-center p-4 sm:p-6 md:p-10">
+    <section className="min-h-[85vh] bg-white flex items-center justify-center p-4 sm:p-6 md:p-10">
       <div className="max-w-5xl w-full bg-white/[0.02] backdrop-blur-xl border border-white/5 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row min-h-[600px]">
         
         {/* LEFT HALF - IMAGE (Hidden on mobile) */}
@@ -157,7 +157,7 @@ export const SignUpPage: React.FC = () => {
                       setFullName(e.target.value);
                       if (status === 'error') setStatus('idle');
                     }}
-                    placeholder="John Doe"
+                    placeholder="Paari Velan"
                     className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-2xl pl-11 pr-4 py-3 text-white placeholder-gray-600 outline-none transition-colors"
                   />
                 </div>
@@ -175,7 +175,7 @@ export const SignUpPage: React.FC = () => {
                       setEmail(e.target.value);
                       if (status === 'error') setStatus('idle');
                     }}
-                    placeholder="name@example.com"
+                    placeholder="paari@outlook.com"
                     className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-emerald-500 rounded-2xl pl-11 pr-4 py-3 text-white placeholder-gray-600 outline-none transition-colors"
                   />
                 </div>

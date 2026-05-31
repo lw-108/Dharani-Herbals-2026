@@ -9,11 +9,11 @@ export const WishlistPage: React.FC = () => {
 
   if (wishlist.length === 0) {
     return (
-      <section className="min-h-screen bg-[#0a0f09] flex items-center justify-center text-white p-6">
+      <section className="min-h-screen bg-white flex items-center justify-center text-gray-900 p-6">
         <div className="text-center">
           <Heart className="mx-auto mb-4 w-12 h-12 text-red-500 fill-red-500/20" />
           <h2 className="text-2xl font-semibold mb-2">Your Wishlist is Empty</h2>
-          <p className="mb-6 text-gray-400">Add products to your wishlist to keep track of items you love!</p>
+          <p className="mb-6 text-gray-600">Add products to your wishlist to keep track of items you love!</p>
           <Link to="/" className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#0d5c3f] text-white font-medium hover:bg-[#0b4f36] transition-all">
             Browse Products
           </Link>
@@ -23,7 +23,7 @@ export const WishlistPage: React.FC = () => {
   }
 
   return (
-    <section className="bg-[#0a0f09] min-h-screen p-6 text-white">
+    <section className="bg-white min-h-screen p-6 text-gray-900">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
           <Heart className="w-8 h-8 text-red-500 fill-red-500" />

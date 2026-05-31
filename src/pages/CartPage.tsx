@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCartWishlist } from '@/context/CartWishlistContext';
 import { Button } from '@/components/ui/button';
-import { X, ShoppingCart, CheckCircle2, Loader2, ShoppingBag } from 'lucide-react';
+import { X, ShoppingCart, CheckCircle2, Loader2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const CartPage: React.FC = () => {
@@ -36,7 +36,7 @@ export const CartPage: React.FC = () => {
 
   if (cart.length === 0 && checkoutStatus !== 'success') {
     return (
-      <section className="min-h-[85vh] bg-[#0a0f09] flex items-center justify-center text-white p-6">
+      <section className="min-h-[85vh] bg-white flex items-center justify-center text-white p-6">
         <div className="text-center max-w-md bg-white/[0.02] backdrop-blur-xl border border-white/5 p-8 rounded-3xl">
           <ShoppingCart className="mx-auto mb-6 w-16 h-16 text-emerald-500 opacity-80" />
           <h2 className="text-2xl font-bold mb-3">Your Cart is Empty</h2>
@@ -51,7 +51,7 @@ export const CartPage: React.FC = () => {
 
   if (checkoutStatus === 'processing') {
     return (
-      <section className="min-h-[85vh] bg-[#0a0f09] flex items-center justify-center text-white p-6">
+      <section className="min-h-[85vh] bg-white flex items-center justify-center text-white p-6">
         <div className="text-center bg-white/[0.02] backdrop-blur-xl border border-white/5 p-10 rounded-3xl max-w-sm w-full">
           <Loader2 className="mx-auto mb-6 w-12 h-12 text-emerald-500 animate-spin" />
           <h2 className="text-xl font-bold mb-2">Processing Payment</h2>
@@ -63,7 +63,7 @@ export const CartPage: React.FC = () => {
 
   if (checkoutStatus === 'success') {
     return (
-      <section className="min-h-[85vh] bg-[#0a0f09] flex items-center justify-center text-white p-6">
+      <section className="min-h-[85vh] bg-white flex items-center justify-center text-white p-6">
         <div className="text-center bg-white/[0.02] backdrop-blur-xl border border-emerald-500/20 p-10 rounded-3xl max-w-sm w-full shadow-2xl shadow-emerald-500/5">
           <CheckCircle2 className="mx-auto mb-6 w-16 h-16 text-emerald-400 animate-bounce" />
           <h2 className="text-2xl font-bold text-emerald-400 mb-2">Order Confirmed!</h2>
@@ -75,7 +75,7 @@ export const CartPage: React.FC = () => {
   }
 
   return (
-    <section className="bg-[#0a0f09] min-h-screen p-6 text-white">
+    <section className="bg-white min-h-screen p-6 text-white">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl font-extrabold mb-8 flex items-center gap-3 tracking-tight">
           <ShoppingCart className="w-8 h-8 text-emerald-500" />
@@ -127,38 +127,34 @@ export const CartPage: React.FC = () => {
           </div>
 
           {/* Cart summary block */}
-          <div className="bg-white/[0.02] backdrop-blur-md rounded-3xl border border-white/5 p-6 h-fit space-y-6">
-            <h2 className="text-lg font-bold border-b border-white/5 pb-4">Order Summary</h2>
-            
-            <div className="space-y-3 text-sm text-gray-400">
-              <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span className="text-white font-medium">₹{total.toLocaleString('en-IN')}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Delivery Charges</span>
-                <span className="text-emerald-400 font-medium uppercase tracking-wider text-xs bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">Free</span>
-              </div>
-              <div className="border-t border-white/5 pt-4 mt-2 flex justify-between text-base text-white font-bold">
-                <span>Estimated Total</span>
-                <span className="text-emerald-400">₹{total.toLocaleString('en-IN')}</span>
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sm:p-8 space-y-6">
+            <h2 className="text-2xl font-semibold text-gray-800 text-center">Order Summary</h2>
+            <div className="space-y-4 text-gray-700">
+              <div className="flex justify-between"><span className="font-medium">Subtotal</span><span>₹{total}</span></div>
+              <div className="flex justify-between"><span className="font-medium">Shipping</span><span className="text-sm text-gray-500">Calculated at checkout</span></div>
+              <div className="flex justify-between"><span className="font-medium">Tax</span><span className="text-sm text-gray-500">Inclusive</span></div>
+              <hr className="border-gray-200" />
+              <div className="flex justify-between text-xl font-bold text-gray-800"><span>Total</span><span>₹{total}</span></div>
+              <p className="text-xs text-gray-500 italic">*Final shipping calculated at checkout based on delivery location</p>
+            </div>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button onClick={handleCheckout} className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-6 rounded-lg transition-colors">Proceed to Checkout</Button>
+              <Link to="/EveryProducts" className="w-full sm:w-auto text-center bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-6 rounded-lg transition-colors">Continue Shopping</Link>
+            </div>
+            <div className="mt-6 text-center text-gray-500 text-sm">
+              <p className="font-medium text-gray-800 mb-1">Secured & Powered by</p>
+              <div className="flex items-center justify-center gap-2 text-gray-700">
+                <img src="/razorpay-logo.svg" alt="Razorpay" className="h-5" />
+                <span className="font-semibold">Razorpay</span>
+                <span className="text-gray-400">|</span>
+                <span className="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0-1.657-1.343-3-3-3s-3 1.343-3 3c0 .276.224.5.5.5h5c.276 0 .5-.224.5-.5zM19 13v6a2 2 0 01-2 2H7a2 2 0 01-2-2v-6" />
+                  </svg>
+                  256-bit SSL • PCI DSS Compliant
+                </span>
               </div>
             </div>
-
-            <Button 
-              onClick={handleCheckout} 
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl py-6 font-bold text-sm transition-all shadow-lg shadow-emerald-500/10 flex items-center justify-center gap-2"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              Place Order
-            </Button>
-
-            <Link 
-              to="/EveryProducts" 
-              className="block text-center text-xs text-gray-500 hover:text-emerald-400 transition-colors pt-2"
-            >
-              Add more items to your cart
-            </Link>
           </div>
         </div>
       </div>

@@ -121,7 +121,7 @@ export default function Banner() {
           <div className="hidden items-center gap-4 lg:flex">
 
             {/* FACEBOOK */}
-            <a href="#">
+            <a href="https://www.facebook.com/photo/?fbid=122103537284825570&set=a.122103536822825570" target="_blank" rel="noopener noreferrer">
               <img
                 src="/icons/fb.png"
                 alt="Facebook"
@@ -130,7 +130,7 @@ export default function Banner() {
             </a>
 
             {/* INSTAGRAM */}
-            <a href="#">
+            <a href="https://www.instagram.com/dharani_herbbals?igsh=MXRueWJqMmtpZHRjOQ==" target="_blank" rel="noopener noreferrer">
               <img
                 src="/icons/ins.png"
                 alt="Instagram"
@@ -139,7 +139,7 @@ export default function Banner() {
             </a>
 
             {/* YOUTUBE */}
-            <a href="#">
+            <a href="https://www.youtube.com/@dharaniherbbalsppy" target="_blank" rel="noopener noreferrer">
               <img
                 src="/icons/yt.png"
                 alt="YouTube"
@@ -148,7 +148,7 @@ export default function Banner() {
             </a>
 
             {/* X / TWITTER */}
-            <a href="#">
+            <a href="https://twitter.com/HerbbalsDharani" target="_blank" rel="noopener noreferrer">
               <img
                 src="/icons/X.png"
                 alt="X"

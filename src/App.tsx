@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 const AdminLoginPage = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
 import Banner from "./sections/BannerSection";
 import HeroSection from "./sections/HeroSection";
 import Navbar from "@/components/Navbar";
@@ -33,12 +35,14 @@ import { CartWishlistProvider } from "@/context/CartWishlistContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import ScrollToTop from "@/components/ScrollToTop";
 import NotFoundPage from "./pages/NotFoundPage";
+import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
 
 export function App() {
   return (
     <CartWishlistProvider>
       <BrowserRouter>
         <ScrollToTop />
+        <WhatsAppFloatingButton />
         <LoadingOverlay />
         <Banner />
         <Navbar />
@@ -72,6 +76,14 @@ export function App() {
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/admin" element={<AdminLoginPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={
+              <>
+                <AboutPage />
+                <WhatsAppCTA />
+                <Footer />
+              </>
+            } />
             <Route path="/admin/dashboard/*" element={<AdminDashboard />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Heart,
-  ShoppingCart,
-  LogOut,
-  User,
-} from "lucide-react";
+import { Heart, ShoppingCart, LogOut, User } from "lucide-react";
 
 import { useNavigate, Link } from "react-router-dom";
 
@@ -39,8 +34,8 @@ const navLinks: { label: string; path: string }[] = [
     path: "/EveryProducts?category=HEALTH%20%26%20WELLNESS",
   },
   { label: "Shop All", path: "/EveryProducts" },
-  { label: "About Us", path: "/About" },
-  { label: "Contact", path: "/Contact" },
+  { label: "About Us", path: "/about" },
+  { label: "Contact", path: "/contact" },
 ];
 
 export const Navbar = () => {
@@ -312,49 +307,49 @@ export const Navbar = () => {
             </Button>
           </Link>
 
-          {/* CART */}
-          <Link to="/cart" className="relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="
-                relative
-                h-10
-                w-10
-                rounded-full
-                text-zinc-700
-                transition-all
-                duration-300
-                hover:scale-105
-                hover:bg-[#0d5c3f]/8
-                hover:text-[#0d5c3f]
-              "
-            >
-              <ShoppingCart className="h-[18px] w-[18px]" />
+{/* CART */}
+<Link to="/cart" className="relative">
+  <Button
+    variant="ghost"
+    size="icon"
+    className="
+      relative
+      h-10
+      w-10
+      rounded-full
+      text-zinc-700
+      transition-all
+      duration-300
+      hover:scale-105
+      hover:bg-[#0d5c3f]/8
+      hover:text-[#0d5c3f]
+    "
+  >
+    <ShoppingCart className="h-[18px] w-[18px]" />
+    {cart.length > 0 && (
+      <span
+        className="
+          absolute
+          -right-0.5
+          -top-0.5
+          flex
+          h-4
+          w-4
+          items-center
+          justify-center
+          rounded-full
+          bg-[#0d5c3f]
+          text-[9px]
+          font-bold
+          text-white
+        "
+      >
+        {cart.length}
+      </span>
+    )}
+  </Button>
+</Link>
 
-              {cart.length > 0 && (
-                <span
-                  className="
-                    absolute
-                    -right-0.5
-                    -top-0.5
-                    flex
-                    h-4
-                    w-4
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-[#0d5c3f]
-                    text-[9px]
-                    font-bold
-                    text-white
-                  "
-                >
-                  {cart.length}
-                </span>
-              )}
-            </Button>
-          </Link>
 
           {/* AUTH SECTION */}
           {isLoggedIn ? (

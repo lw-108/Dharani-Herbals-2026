@@ -187,7 +187,7 @@ const DiscoverTheDifference = () => {
               Difference
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Watch our featured products in action
           </p>
         </motion.div>
@@ -200,8 +200,8 @@ const DiscoverTheDifference = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           {/* Gradient Fades on edges */}
-          {/* <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" /> */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           {/* Products Track */}
           <div className="flex gap-4 px-8 py-4" style={{ width: "max-content" }}>
@@ -214,9 +214,9 @@ const DiscoverTheDifference = () => {
                 className="flex-shrink-0 w-[280px]"
                 style={{ width: "280px" }}
               >
-                <div className="group relative bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/10">
+                <div className="group relative bg-white rounded-2xl border border-gray-200 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden hover:shadow-2xl hover:shadow-emerald-500/10">
                   {/* Video Thumbnail */}
-                  <div className="relative aspect-[9/16] bg-gradient-to-b from-gray-800 to-gray-900 overflow-hidden">
+                  <div className="relative aspect-[9/16] bg-gradient-to-b from-gray-100 to-gray-200 overflow-hidden">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -231,8 +231,8 @@ const DiscoverTheDifference = () => {
                       onClick={() => handleVideoClick(product.youtubeId)}
                       className="absolute inset-0 flex items-center justify-center cursor-pointer group/play"
                     >
-                      <div className="w-16 h-16 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center group-hover/play:scale-110 group-hover/play:bg-emerald-500 transition-all duration-300 border border-white/20">
-                        <Play className="w-7 h-7 text-white fill-white ml-1" />
+                      <div className="w-16 h-16 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center group-hover/play:scale-110 group-hover/play:bg-emerald-500 transition-all duration-300 border border-gray-200 shadow-lg">
+                        <Play className="w-7 h-7 text-green-700 group-hover/play:text-white fill-current ml-1" />
                       </div>
                     </div>
 
@@ -245,7 +245,7 @@ const DiscoverTheDifference = () => {
 
                     {/* Duration Badge */}
                     <div className="absolute bottom-3 right-3">
-                      <span className="text-xs font-medium px-2 py-1 rounded bg-black/60 backdrop-blur-sm text-white">
+                      <span className="text-xs font-medium px-2 py-1 rounded bg-white/80 backdrop-blur-sm text-gray-700 shadow">
                         Short
                       </span>
                     </div>
@@ -253,16 +253,21 @@ const DiscoverTheDifference = () => {
 
                   {/* Product Info */}
                   <div className="p-4">
-                    <h3 className="text-sm font-bold text-white mb-1 line-clamp-1 group-hover:text-emerald-400 transition-colors">
+                    <h3 className="text-sm font-bold text-gray-800 mb-1 line-clamp-1 group-hover:text-emerald-600 transition-colors">
                       {product.name}
                     </h3>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-0.5 mt-1 mb-2">
-                        {Array.from({ length: 5 }, (_, i) => (
-                          <Star key={i} className={`w-3 h-3 ${i < (Math.floor(Math.random() * 5) + 1) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300 fill-gray-300'}`} />
-                        ))}
+                      <div className="flex flex-col">
+                        <div className="flex items-center gap-0.5 mt-1 mb-2">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <Star 
+                              key={i} 
+                              className={`w-3 h-3 ${i < 4 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300 fill-gray-300'}`} 
+                            />
+                          ))}
+                        </div>
+                        <span className="text-lg font-bold text-green-700">{product.price}</span>
                       </div>
-                      <span className="text-lg font-bold text-white">{product.price}</span>
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -276,7 +281,7 @@ const DiscoverTheDifference = () => {
 
                   {/* Shine Effect */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-emerald-500/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </div>
                 </div>
               </motion.div>

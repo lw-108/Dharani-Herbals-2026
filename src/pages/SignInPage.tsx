@@ -15,7 +15,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Phone,
-  Loader2,
 } from "lucide-react";
 
 export const SignInPage: React.FC = () => {
@@ -267,7 +266,7 @@ if (!token) {
     <section
       className="
         min-h-[85vh]
-        bg-[#0a0f09]
+        bg-white
         flex
         items-center
         justify-center
@@ -411,7 +410,7 @@ if (!token) {
               className="
                 text-3xl
                 font-extrabold
-                text-white
+                text-[green]
                 mb-2
               "
             >
@@ -704,7 +703,7 @@ if (!token) {
                   shadow-emerald-500/10
                   disabled:opacity-60
                 "
-              >
+              >Sign In
                 {/* Admin button removed; use Link below */}
               </Button>
               <Link
